@@ -1,6 +1,6 @@
 x-airflow-common:
   &airflow-common
-  image: airflow:ca-cert
+  image: airflow:ca-certs
   build:
     context: .
     dockerfile: Dockerfile_Airflow
@@ -155,7 +155,7 @@ services:
       - ./airflow:/sources
 
   pyspark:
-    image: pyspark-notebook:ca-cert
+    image: pyspark-notebook:ca-certs
     build:
       context: .
       dockerfile: Dockerfile_Pyspark
@@ -194,7 +194,7 @@ services:
       - minio:127.0.0.1
 
   trino:
-    image: trino:ca-cert
+    image: trino:ca-certs
     build:
       context: .
       dockerfile: Dockerfile_Trino
@@ -214,7 +214,7 @@ services:
       - ./trino/spooling-manager.properties:/etc/trino/spooling-manager.properties
 
   metastore:
-    # image: hive:ca-cert
+    # image: hive:ca-certs
     image: apache/hive:3.1.3
     build:
       context: .
@@ -269,7 +269,7 @@ services:
       - medical-network
 
   clickhouse:
-    image: clickhouse:ca-cert
+    image: clickhouse:ca-certs
     container_name: clickhouse
     hostname: clickhouse
     environment:
