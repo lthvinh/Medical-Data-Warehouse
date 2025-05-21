@@ -1,0 +1,274 @@
+[2025-04-26T08:15:23.794+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-26T08:15:23.870+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: spark_submit_test_dag_v2.run_simple_spark_app manual__2025-04-26T08:15:21.125270+00:00 [queued]>
+[2025-04-26T08:15:23.892+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: spark_submit_test_dag_v2.run_simple_spark_app manual__2025-04-26T08:15:21.125270+00:00 [queued]>
+[2025-04-26T08:15:23.893+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-04-26T08:15:23.925+0000] {taskinstance.py:2890} INFO - Executing <Task(SparkSubmitOperator): run_simple_spark_app> on 2025-04-26 08:15:21.125270+00:00
+[2025-04-26T08:15:23.938+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'spark_submit_test_dag_v2', 'run_simple_spark_app', 'manual__2025-04-26T08:15:21.125270+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmp87smdnt4']
+[2025-04-26T08:15:23.941+0000] {standard_task_runner.py:105} INFO - Job 5: Subtask run_simple_spark_app
+[2025-04-26T08:15:23.944+0000] {logging_mixin.py:190} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=2099) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-04-26T08:15:23.945+0000] {standard_task_runner.py:72} INFO - Started process 2100 to run task
+[2025-04-26T08:15:24.007+0000] {task_command.py:467} INFO - Running <TaskInstance: spark_submit_test_dag_v2.run_simple_spark_app manual__2025-04-26T08:15:21.125270+00:00 [running]> on host airflow-scheduler
+[2025-04-26T08:15:24.170+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='spark_submit_test_dag_v2' AIRFLOW_CTX_TASK_ID='run_simple_spark_app' AIRFLOW_CTX_EXECUTION_DATE='2025-04-26T08:15:21.125270+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-04-26T08:15:21.125270+00:00'
+[2025-04-26T08:15:24.174+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-26T08:15:24.334+0000] {base.py:84} INFO - Retrieving connection 'spark_conn'
+[2025-04-26T08:15:24.339+0000] {spark_submit.py:473} INFO - Spark-Submit cmd: spark-submit --master spark://spark-master:7077 --packages io.delta:delta-spark_2.12:3.3.0,org.apache.hadoop:hadoop-aws:3.3.4 --name arrow-spark --deploy-mode client /opt/***/dags/spark_simple_app.py
+[2025-04-26T08:15:29.002+0000] {spark_submit.py:649} INFO - :: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-04-26T08:15:29.203+0000] {spark_submit.py:649} INFO - Ivy Default Cache set to: /home/***/.ivy2/cache
+[2025-04-26T08:15:29.204+0000] {spark_submit.py:649} INFO - The jars for the packages stored in: /home/***/.ivy2/jars
+[2025-04-26T08:15:29.211+0000] {spark_submit.py:649} INFO - io.delta#delta-spark_2.12 added as a dependency
+[2025-04-26T08:15:29.212+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-aws added as a dependency
+[2025-04-26T08:15:29.213+0000] {spark_submit.py:649} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-c64abf98-a298-4b76-94c2-a6e2d6cb558a;1.0
+[2025-04-26T08:15:29.214+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-04-26T08:15:29.546+0000] {spark_submit.py:649} INFO - found io.delta#delta-spark_2.12;3.3.0 in central
+[2025-04-26T08:15:29.622+0000] {spark_submit.py:649} INFO - found io.delta#delta-storage;3.3.0 in central
+[2025-04-26T08:15:29.686+0000] {spark_submit.py:649} INFO - found org.antlr#antlr4-runtime;4.9.3 in central
+[2025-04-26T08:15:29.806+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-aws;3.3.4 in central
+[2025-04-26T08:15:29.846+0000] {spark_submit.py:649} INFO - found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+[2025-04-26T08:15:29.892+0000] {spark_submit.py:649} INFO - found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+[2025-04-26T08:15:29.960+0000] {spark_submit.py:649} INFO - :: resolution report :: resolve 712ms :: artifacts dl 35ms
+[2025-04-26T08:15:29.961+0000] {spark_submit.py:649} INFO - :: modules in use:
+[2025-04-26T08:15:29.961+0000] {spark_submit.py:649} INFO - com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+[2025-04-26T08:15:29.962+0000] {spark_submit.py:649} INFO - io.delta#delta-spark_2.12;3.3.0 from central in [default]
+[2025-04-26T08:15:29.963+0000] {spark_submit.py:649} INFO - io.delta#delta-storage;3.3.0 from central in [default]
+[2025-04-26T08:15:29.963+0000] {spark_submit.py:649} INFO - org.antlr#antlr4-runtime;4.9.3 from central in [default]
+[2025-04-26T08:15:29.963+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+[2025-04-26T08:15:29.964+0000] {spark_submit.py:649} INFO - org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+[2025-04-26T08:15:29.965+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-04-26T08:15:29.966+0000] {spark_submit.py:649} INFO - |                  |            modules            ||   artifacts   |
+[2025-04-26T08:15:29.966+0000] {spark_submit.py:649} INFO - |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+[2025-04-26T08:15:29.967+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-04-26T08:15:29.968+0000] {spark_submit.py:649} INFO - |      default     |   6   |   0   |   0   |   0   ||   6   |   0   |
+[2025-04-26T08:15:29.968+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-04-26T08:15:29.974+0000] {spark_submit.py:649} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-c64abf98-a298-4b76-94c2-a6e2d6cb558a
+[2025-04-26T08:15:29.975+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-04-26T08:15:29.988+0000] {spark_submit.py:649} INFO - 0 artifacts copied, 6 already retrieved (0kB/14ms)
+[2025-04-26T08:15:30.469+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:30 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-04-26T08:15:37.723+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SparkContext: Running Spark version 3.5.3
+[2025-04-26T08:15:37.725+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SparkContext: OS info Linux, 5.15.153.1-microsoft-standard-WSL2, amd64
+[2025-04-26T08:15:37.726+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SparkContext: Java version 17.0.14
+[2025-04-26T08:15:37.763+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO ResourceUtils: ==============================================================
+[2025-04-26T08:15:37.764+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO ResourceUtils: No custom resources configured for spark.driver.
+[2025-04-26T08:15:37.765+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO ResourceUtils: ==============================================================
+[2025-04-26T08:15:37.766+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SparkContext: Submitted application: MyETLPipeline
+[2025-04-26T08:15:37.816+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+[2025-04-26T08:15:37.830+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO ResourceProfile: Limiting resource is cpu
+[2025-04-26T08:15:37.831+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO ResourceProfileManager: Added ResourceProfile id: 0
+[2025-04-26T08:15:37.968+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SecurityManager: Changing view acls to: ***
+[2025-04-26T08:15:37.969+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SecurityManager: Changing modify acls to: ***
+[2025-04-26T08:15:37.970+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SecurityManager: Changing view acls groups to:
+[2025-04-26T08:15:37.971+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SecurityManager: Changing modify acls groups to:
+[2025-04-26T08:15:37.971+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:37 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ***; groups with view permissions: EMPTY; users with modify permissions: ***; groups with modify permissions: EMPTY
+[2025-04-26T08:15:38.339+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO Utils: Successfully started service 'sparkDriver' on port 34743.
+[2025-04-26T08:15:38.389+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO SparkEnv: Registering MapOutputTracker
+[2025-04-26T08:15:38.446+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO SparkEnv: Registering BlockManagerMaster
+[2025-04-26T08:15:38.479+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+[2025-04-26T08:15:38.480+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+[2025-04-26T08:15:38.486+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+[2025-04-26T08:15:38.528+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-1dd3b8e9-36fe-49dd-97f9-45257dd28876
+[2025-04-26T08:15:38.549+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+[2025-04-26T08:15:38.580+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO SparkEnv: Registering OutputCommitCoordinator
+[2025-04-26T08:15:38.921+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:38 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+[2025-04-26T08:15:39.048+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+[2025-04-26T08:15:39.103+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added JAR file:///home/***/.ivy2/jars/io.delta_delta-spark_2.12-3.3.0.jar at spark://***-scheduler:34743/jars/io.delta_delta-spark_2.12-3.3.0.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.104+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added JAR file:///home/***/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar at spark://***-scheduler:34743/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.104+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added JAR file:///home/***/.ivy2/jars/io.delta_delta-storage-3.3.0.jar at spark://***-scheduler:34743/jars/io.delta_delta-storage-3.3.0.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.105+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added JAR file:///home/***/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar at spark://***-scheduler:34743/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.105+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added JAR file:///home/***/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar at spark://***-scheduler:34743/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.106+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added JAR file:///home/***/.ivy2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar at spark://***-scheduler:34743/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.110+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added file file:///home/***/.ivy2/jars/io.delta_delta-spark_2.12-3.3.0.jar at spark://***-scheduler:34743/files/io.delta_delta-spark_2.12-3.3.0.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.112+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO Utils: Copying /home/***/.ivy2/jars/io.delta_delta-spark_2.12-3.3.0.jar to /tmp/spark-13c975b1-d4b6-4ada-baed-59762f85990c/userFiles-af8eb9ae-8a0f-41bc-b371-30f4d863d7a5/io.delta_delta-spark_2.12-3.3.0.jar
+[2025-04-26T08:15:39.198+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added file file:///home/***/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar at spark://***-scheduler:34743/files/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.199+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO Utils: Copying /home/***/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar to /tmp/spark-13c975b1-d4b6-4ada-baed-59762f85990c/userFiles-af8eb9ae-8a0f-41bc-b371-30f4d863d7a5/org.apache.hadoop_hadoop-aws-3.3.4.jar
+[2025-04-26T08:15:39.212+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added file file:///home/***/.ivy2/jars/io.delta_delta-storage-3.3.0.jar at spark://***-scheduler:34743/files/io.delta_delta-storage-3.3.0.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.213+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO Utils: Copying /home/***/.ivy2/jars/io.delta_delta-storage-3.3.0.jar to /tmp/spark-13c975b1-d4b6-4ada-baed-59762f85990c/userFiles-af8eb9ae-8a0f-41bc-b371-30f4d863d7a5/io.delta_delta-storage-3.3.0.jar
+[2025-04-26T08:15:39.222+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added file file:///home/***/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar at spark://***-scheduler:34743/files/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.223+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO Utils: Copying /home/***/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar to /tmp/spark-13c975b1-d4b6-4ada-baed-59762f85990c/userFiles-af8eb9ae-8a0f-41bc-b371-30f4d863d7a5/org.antlr_antlr4-runtime-4.9.3.jar
+[2025-04-26T08:15:39.233+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO SparkContext: Added file file:///home/***/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar at spark://***-scheduler:34743/files/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1745655337706
+[2025-04-26T08:15:39.233+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:39 INFO Utils: Copying /home/***/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to /tmp/spark-13c975b1-d4b6-4ada-baed-59762f85990c/userFiles-af8eb9ae-8a0f-41bc-b371-30f4d863d7a5/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar
+[2025-04-26T08:15:40.840+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:40 INFO SparkContext: Added file file:///home/***/.ivy2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar at spark://***-scheduler:34743/files/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1745655337706
+[2025-04-26T08:15:40.841+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:40 INFO Utils: Copying /home/***/.ivy2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to /tmp/spark-13c975b1-d4b6-4ada-baed-59762f85990c/userFiles-af8eb9ae-8a0f-41bc-b371-30f4d863d7a5/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar
+[2025-04-26T08:15:41.025+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:41 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
+[2025-04-26T08:15:41.230+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:41 INFO TransportClientFactory: Successfully created connection to spark-master/172.20.0.7:7077 after 93 ms (0 ms spent in bootstraps)
+[2025-04-26T08:15:42.416+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20250426081542-0000
+[2025-04-26T08:15:42.433+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 41643.
+[2025-04-26T08:15:42.433+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO NettyBlockTransferService: Server created on ***-scheduler:41643
+[2025-04-26T08:15:42.436+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+[2025-04-26T08:15:42.453+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, ***-scheduler, 41643, None)
+[2025-04-26T08:15:42.461+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO BlockManagerMasterEndpoint: Registering block manager ***-scheduler:41643 with 434.4 MiB RAM, BlockManagerId(driver, ***-scheduler, 41643, None)
+[2025-04-26T08:15:42.465+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, ***-scheduler, 41643, None)
+[2025-04-26T08:15:42.469+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, ***-scheduler, 41643, None)
+[2025-04-26T08:15:42.513+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20250426081542-0000/0 on worker-20250426075431-172.20.0.8-42149 (172.20.0.8:42149) with 8 core(s)
+[2025-04-26T08:15:42.517+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO StandaloneSchedulerBackend: Granted executor ID app-20250426081542-0000/0 on hostPort 172.20.0.8:42149 with 8 core(s), 1024.0 MiB RAM
+[2025-04-26T08:15:42.882+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:42 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+[2025-04-26T08:15:44.484+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:44 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20250426081542-0000/0 is now RUNNING
+[2025-04-26T08:15:46.310+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:46 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
+[2025-04-26T08:15:49.132+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:49 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+[2025-04-26T08:15:50.187+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:50 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-04-26T08:15:50.245+0000] {spark_submit.py:649} INFO - 25/04/26 08:15:50 INFO MetricsSystemImpl: s3a-file-system metrics system started
+[2025-04-26T08:17:56.345+0000] {job.py:239} ERROR - Job heartbeat failed with error
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/MySQLdb/connections.py", line 200, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2005, "Unknown server host 'mysql' (-3)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/jobs/job.py", line 207, in heartbeat
+    self._merge_from(Job._fetch_from_db(self, session))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/api_internal/internal_api_call.py", line 166, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 94, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/retries.py", line 93, in wrapped_function
+    for attempt in run_with_db_retries(max_retries=retries, logger=logger, **retry_kwargs):
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/tenacity/__init__.py", line 443, in __iter__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/tenacity/__init__.py", line 376, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/tenacity/__init__.py", line 418, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/tenacity/__init__.py", line 185, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/retries.py", line 102, in wrapped_function
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/jobs/job.py", line 335, in _fetch_from_db
+    session.merge(job)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3056, in merge
+    return self._merge(
+           ^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3136, in _merge
+    merged = self.get(
+             ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2853, in get
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2975, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1716, in execute
+    conn = self._connection_for_bind(bind)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1555, in _connection_for_bind
+    return self._transaction._connection_for_bind(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 750, in _connection_for_bind
+    conn = bind.connect()
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/future/engine.py", line 412, in connect
+    return super(Engine, self).connect()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+           ^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/MySQLdb/connections.py", line 200, in __init__
+    super().__init__(*args, **kwargs2)
+sqlalchemy.exc.OperationalError: (MySQLdb.OperationalError) (2005, "Unknown server host 'mysql' (-3)")
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2025-04-26T08:19:17.423+0000] {job.py:254} ERROR - Job heartbeat failed with error. Scheduler is in unhealthy state

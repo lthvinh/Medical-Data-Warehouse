@@ -1,0 +1,81 @@
+application:
+    name: "MyETLPipeline"
+
+spark:
+    config:
+        spark.app.name: "MyETLPipeline"
+        spark.sql.extensions: "io.delta.sql.DeltaSparkSessionExtension"
+        spark.sql.catalog.spark_catalog: "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+        spark.sql.catalogImplementation: "hive"
+        spark.hive.metastore.uris: "thrift://metastore:9083"
+        spark.sql.hive.metastore.version: '3.1.3'
+        spark.sql.hive.metastore.jars: 'maven'
+        fs.s3a.access.key: "admin"
+        fs.s3a.secret.key: "password"
+        fs.s3a.endpoint: "https://minio:9000"
+        fs.s3a.connection.ssl.enabled: "true"
+        fs.s3a.path.style.access: "true"
+        fs.s3a.attempts.maximum: "1"
+        fs.s3a.connection.establish.timeout: "50"
+        fs.s3a.connection.timeout: "100"
+        
+    packages:
+        - "io.delta:delta-spark_2.12:3.3.0"
+        - "org.apache.hadoop:hadoop-aws:3.3.4"
+
+metastore:
+    enriched: "enriched"
+    curated: "curated"
+
+paths:
+    raw: "s3a://medical-bucket/raw/transactional/medical-data-sample"
+    enriched: "s3a://medical-bucket/enriched/transactional/medical-data-sample"
+    curated: "s3a://medical-bucket/curated/transactional/medical-data-sample"
+
+# tables:
+#     raw:
+#         allergies:
+#         careplans:
+#         claims:
+#         claims_transactions:
+#         conditions:
+#         devices:
+#         encounters:
+#         imaging_studies:
+#         immunizations:
+#         medications:
+#         observations:
+#         organizations:
+#         patients:
+#         payer_transitions:
+#         payers:
+#         procedures:
+#         providers:
+#         supplies:
+#     enriched:
+#         enriched_allergies:
+#         enriched_careplans:
+#         enriched_claims:
+#         enriched_claims_transactions:
+#         enriched_conditions:
+#         enriched_devices:
+#         enriched_encounters:
+#         enriched_imaging_studies:
+#         enriched_immunizations:
+#         enriched_medications:
+#         enriched_observations:
+#         enriched_organizations:
+#         enriched_patients:
+#         enriched_payer_transitions:
+#         enriched_payers:
+#         enriched_procedures:
+#         enriched_providers:
+#         enriched_supplies:
+#     curated:
+#         tables:
+#           - name: "curated_table"
+#             location: "/data/curated/table1"
+
+lakefs:
+    repo: "medical-repository"
+    branch: "raw"

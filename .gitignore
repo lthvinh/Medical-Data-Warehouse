@@ -1,0 +1,14 @@
+.venv
+.env
+clickhouse/
+data/tables/
+data/*.csv
+etl/.ipynb_checkpoints/
+etl/enriched_curated/.ipynb_checkpoints/
+etl/raw_enriched/.ipynb_checkpoints/
+etl/metastore_db/
+etl/*.ipynb
+hive/warehouse/*
+hive/entrypoint.sh
+minio/data/
+mysql/

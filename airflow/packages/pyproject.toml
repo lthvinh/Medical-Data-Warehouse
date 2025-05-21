@@ -1,0 +1,28 @@
+[project]
+name = "packages"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "luuthanhvinh",email = "ltvinh1101@gmail.com"}
+]
+readme = "README.md"
+requires-python = "=3.12.9"
+dependencies = [
+    "apache-airflow (==2.10.5)",
+    "pyspark (==3.5.3)",
+    "pendulum (>=3.1.0,<4.0.0)",
+    "pyyaml (>=6.0.2,<7.0.0)",
+    "apache-airflow-providers-common-compat (>=1.6.0,<2.0.0)",
+    "grpcio-status (>=1.71.0,<2.0.0)",
+    "apache-airflow-providers-apache-spark (>=5.2.1,<6.0.0)",
+    "poetry-plugin-export (>=1.9.0,<2.0.0)",
+    "delta-spark (>=3.3.1,<4.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "packages", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

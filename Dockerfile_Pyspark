@@ -1,0 +1,21 @@
+FROM quay.io/jupyter/pyspark-notebook:spark-3.5.3
+
+USER root
+
+RUN apt-get update && apt-get install -y ca-certificates
+
+COPY minio/minio-certs/public.crt /usr/local/share/ca-certificates/public_minio.crt
+COPY trino/trino-certs/public.crt /usr/local/share/ca-certificates/public_trino.crt
+
+RUN update-ca-certificates
+
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+COPY minio/minio-certs/public.crt /tmp/minio-cert.crt 
+COPY trino/trino-certs/public.crt /tmp/trino-cert.crt 
+
+RUN keytool -importcert -file /tmp/minio-cert.crt -alias minio-ca -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+RUN keytool -importcert -file /tmp/trino-cert.crt -alias trino-ca -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+
+
+USER jovyan
