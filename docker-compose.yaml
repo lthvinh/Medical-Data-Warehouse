@@ -240,7 +240,7 @@ services:
       - ./hive/hive-lib/mysql-connector-java-8.0.30.jar:/opt/hive/lib/mysql.jar
 
   spark-master:
-    image: customed-spark:3.5.3
+    image: spark:ca-certs
     container_name: spark-master
     hostname: spark-master
     environment:
@@ -254,7 +254,7 @@ services:
       - medical-network
 
   spark-worker:
-    image: customed-spark:3.5.3
+    image: spark:ca-certs
     container_name: spark-worker
     hostname: spark-worker
     environment:

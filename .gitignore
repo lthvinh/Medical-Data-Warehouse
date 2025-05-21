@@ -12,3 +12,4 @@ hive/warehouse/*
 hive/entrypoint.sh
 minio/data/
 mysql/
+test.ipynb

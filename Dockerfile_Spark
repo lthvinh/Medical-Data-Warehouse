@@ -1,5 +1,13 @@
 FROM bitnami/spark:3.5.3
 USER root
+
+RUN apt-get update && apt-get install -y ca-certificates
+
+COPY minio/minio-certs/public.crt /usr/local/share/ca-certificates/
+
+RUN update-ca-certificates
+
 COPY spark/requirements.txt /tmp/requirements.txt
 RUN pip install --timeout=1000 -r /tmp/requirements.txt
+
 USER 1001

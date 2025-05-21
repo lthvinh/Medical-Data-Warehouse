@@ -2,11 +2,6 @@ FROM trinodb/trino:latest
 
 USER root
 
-# COPY minio/minio-certs/public.crt /etc/pki/ca-trust/source/anchors/minio-cert.crt
-# COPY trino/trino-certs/public.crt /etc/pki/ca-trust/source/anchors/trino-cert.crt
-
-# RUN update-ca-trust extract
-
 COPY minio/minio-certs/public.crt /tmp/minio-cert.crt 
 COPY trino/trino-certs/public.crt /tmp/trino-cert.crt 
 

@@ -182,7 +182,7 @@ def main():
         .dropDuplicates()
     )
     
-    dim_observation_group__is_existing = DeltaTable.isDeltaTable(spark, dim_observation_group__table_name)
+    dim_observation_group__is_existing = DeltaTable.isDeltaTable(spark, dim_observation_group__full_path)
     if not dim_observation_group__is_existing:
         dim_observation_group__df.write.mode('overwrite').format('delta').option('path', dim_observation_group__full_path).saveAsTable(dim_observation_group__table_name)
     else:

@@ -4,12 +4,13 @@ USER root
 
 RUN apt update \
     && apt install -y \
-    && apt install default-jdk -y 
+    && apt install default-jdk -y \
+    && get install -y ca-certificates
 
 COPY airflow/spark-3.5.3-bin-hadoop3 /opt/spark
 
 ENV SPARK_HOME=/opt/spark
-ENV PATH="$PATH:$SPARK_HOME/bin"
+ENV PATH="${PATH}:${SPARK_HOME}/bin"
 
 COPY minio/minio-certs/public.crt /usr/local/share/ca-certificates/
 
