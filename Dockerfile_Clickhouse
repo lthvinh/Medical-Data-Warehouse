@@ -1,0 +1,13 @@
+FROM docker.io/bitnami/clickhouse
+
+USER root
+
+RUN apt-get update && apt-get install -y ca-certificates
+
+COPY minio/minio-certs/public.crt /usr/local/share/ca-certificates/public_minio.crt
+
+RUN update-ca-certificates
+
+USER 1001
+
+WORKDIR /

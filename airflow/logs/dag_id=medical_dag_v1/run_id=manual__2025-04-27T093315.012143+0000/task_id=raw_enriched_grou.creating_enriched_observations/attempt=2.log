@@ -1,0 +1,155 @@
+[2025-04-27T10:58:44.331+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-27T10:58:44.461+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: medical_dag_v1.raw_enriched_grou.creating_enriched_observations manual__2025-04-27T09:33:15.012143+00:00 [queued]>
+[2025-04-27T10:58:44.563+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: medical_dag_v1.raw_enriched_grou.creating_enriched_observations manual__2025-04-27T09:33:15.012143+00:00 [queued]>
+[2025-04-27T10:58:44.568+0000] {taskinstance.py:2867} INFO - Starting attempt 2 of 1
+[2025-04-27T10:58:44.694+0000] {taskinstance.py:2890} INFO - Executing <Task(SparkSubmitOperator): raw_enriched_grou.creating_enriched_observations> on 2025-04-27 09:33:15.012143+00:00
+[2025-04-27T10:58:44.799+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'medical_dag_v1', 'raw_enriched_grou.creating_enriched_observations', 'manual__2025-04-27T09:33:15.012143+00:00', '--job-id', '38', '--raw', '--subdir', 'DAGS_FOLDER/raw_enriched_dag.py', '--cfg-path', '/tmp/tmpnd00rk9n']
+[2025-04-27T10:58:44.847+0000] {standard_task_runner.py:105} INFO - Job 38: Subtask raw_enriched_grou.creating_enriched_observations
+[2025-04-27T10:58:44.847+0000] {logging_mixin.py:190} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=204) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-04-27T10:58:44.851+0000] {standard_task_runner.py:72} INFO - Started process 205 to run task
+[2025-04-27T10:58:45.250+0000] {task_command.py:467} INFO - Running <TaskInstance: medical_dag_v1.raw_enriched_grou.creating_enriched_observations manual__2025-04-27T09:33:15.012143+00:00 [running]> on host airflow-scheduler
+[2025-04-27T10:58:45.751+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='medical_dag_v1' AIRFLOW_CTX_TASK_ID='raw_enriched_grou.creating_enriched_observations' AIRFLOW_CTX_EXECUTION_DATE='2025-04-27T09:33:15.012143+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-04-27T09:33:15.012143+00:00'
+[2025-04-27T10:58:45.756+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-27T10:58:46.064+0000] {base.py:84} INFO - Retrieving connection 'spark_conn'
+[2025-04-27T10:58:46.068+0000] {spark_submit.py:473} INFO - Spark-Submit cmd: spark-submit --master local --packages io.delta:delta-spark_2.12:3.3.0,org.apache.hadoop:hadoop-aws:3.3.4 --name arrow-spark --deploy-mode client /opt/etl/raw_enriched/creating_enriched_observations.py
+[2025-04-27T10:58:52.798+0000] {spark_submit.py:649} INFO - :: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-04-27T10:58:53.078+0000] {spark_submit.py:649} INFO - Ivy Default Cache set to: /home/***/.ivy2/cache
+[2025-04-27T10:58:53.083+0000] {spark_submit.py:649} INFO - The jars for the packages stored in: /home/***/.ivy2/jars
+[2025-04-27T10:58:53.093+0000] {spark_submit.py:649} INFO - io.delta#delta-spark_2.12 added as a dependency
+[2025-04-27T10:58:53.094+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-aws added as a dependency
+[2025-04-27T10:58:53.099+0000] {spark_submit.py:649} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-88aec528-565e-4686-b123-9dda593b4c02;1.0
+[2025-04-27T10:58:53.101+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-04-27T10:58:57.481+0000] {spark_submit.py:649} INFO - found io.delta#delta-spark_2.12;3.3.0 in central
+[2025-04-27T10:58:58.330+0000] {spark_submit.py:649} INFO - found io.delta#delta-storage;3.3.0 in central
+[2025-04-27T10:59:06.086+0000] {spark_submit.py:649} INFO - found org.antlr#antlr4-runtime;4.9.3 in central
+[2025-04-27T10:59:12.046+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-aws;3.3.4 in central
+[2025-04-27T10:59:14.582+0000] {spark_submit.py:649} INFO - found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+[2025-04-27T10:59:19.007+0000] {spark_submit.py:649} INFO - found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+[2025-04-27T10:59:19.218+0000] {spark_submit.py:649} INFO - downloading https://repo1.maven.org/maven2/io/delta/delta-spark_2.12/3.3.0/delta-spark_2.12-3.3.0.jar ...
+[2025-04-27T10:59:51.140+0000] {local_task_job_runner.py:346} WARNING - State of this instance has been externally set to removed. Terminating instance.
+[2025-04-27T10:59:51.154+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-04-27T10:59:51.184+0000] {process_utils.py:132} INFO - Sending 15 to group 205. PIDs of all processes in the group: [207, 205]
+[2025-04-27T10:59:51.186+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 205
+[2025-04-27T10:59:51.189+0000] {taskinstance.py:3094} ERROR - Received SIGTERM. Terminating subprocesses.
+[2025-04-27T10:59:51.299+0000] {taskinstance.py:3095} ERROR - Stacktrace: 
+  File "/home/***/.local/bin/***", line 8, in <module>
+    sys.exit(main())
+  File "/home/***/.local/lib/python3.12/site-packages/***/__main__.py", line 62, in main
+    args.func(args)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/utils/providers_configuration_loader.py", line 55, in wrapped_function
+    return func(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/scheduler_command.py", line 56, in scheduler
+    run_command_with_daemon_option(
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/daemon_utils.py", line 86, in run_command_with_daemon_option
+    callback()
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/scheduler_command.py", line 59, in <lambda>
+    callback=lambda: _run_scheduler_job(args),
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/scheduler_command.py", line 47, in _run_scheduler_job
+    run_job(job=job_runner.job, execute_callable=job_runner._execute)
+  File "/home/***/.local/lib/python3.12/site-packages/***/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/jobs/job.py", line 421, in run_job
+    return execute_job(job, execute_callable=execute_callable)
+  File "/home/***/.local/lib/python3.12/site-packages/***/jobs/job.py", line 450, in execute_job
+    ret = execute_callable()
+  File "/home/***/.local/lib/python3.12/site-packages/***/jobs/scheduler_job_runner.py", line 990, in _execute
+    executor.start()
+  File "/home/***/.local/lib/python3.12/site-packages/***/executors/local_executor.py", line 392, in start
+    self.impl.start()
+  File "/home/***/.local/lib/python3.12/site-packages/***/executors/local_executor.py", line 330, in start
+    worker.start()
+  File "/usr/local/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+  File "/usr/local/lib/python3.12/multiprocessing/context.py", line 224, in _Popen
+    return _default_context.get_context().Process._Popen(process_obj)
+  File "/usr/local/lib/python3.12/multiprocessing/context.py", line 282, in _Popen
+    return Popen(process_obj)
+  File "/usr/local/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/usr/local/lib/python3.12/multiprocessing/popen_fork.py", line 71, in _launch
+    code = process_obj._bootstrap(parent_sentinel=child_r)
+  File "/usr/local/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/***/.local/lib/python3.12/site-packages/***/executors/local_executor.py", line 80, in run
+    return super().run()
+  File "/usr/local/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/traces/tracer.py", line 58, in wrapper
+    return func(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/executors/local_executor.py", line 211, in do_work
+    self.execute_work(key=key, command=command)
+  File "/home/***/.local/lib/python3.12/site-packages/***/traces/tracer.py", line 58, in wrapper
+    return func(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/executors/local_executor.py", line 100, in execute_work
+    state = self._execute_work_in_fork(command)
+  File "/home/***/.local/lib/python3.12/site-packages/***/traces/tracer.py", line 58, in wrapper
+    return func(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/executors/local_executor.py", line 142, in _execute_work_in_fork
+    args.func(args)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/task_command.py", line 254, in _run_task_by_selected_method
+    return _run_task_by_local_task_job(args, ti)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/task_command.py", line 322, in _run_task_by_local_task_job
+    ret = run_job(job=job_runner.job, execute_callable=job_runner._execute)
+  File "/home/***/.local/lib/python3.12/site-packages/***/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/jobs/job.py", line 421, in run_job
+    return execute_job(job, execute_callable=execute_callable)
+  File "/home/***/.local/lib/python3.12/site-packages/***/jobs/job.py", line 450, in execute_job
+    ret = execute_callable()
+  File "/home/***/.local/lib/python3.12/site-packages/***/jobs/local_task_job_runner.py", line 171, in _execute
+    self.task_runner.start()
+  File "/home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py", line 55, in start
+    self.process = self._start_by_fork()
+  File "/home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+  File "/home/***/.local/lib/python3.12/site-packages/***/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+  File "/home/***/.local/lib/python3.12/site-packages/***/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+  File "/home/***/.local/lib/python3.12/site-packages/***/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/***/.local/lib/python3.12/site-packages/***/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/***/.local/lib/python3.12/site-packages/***/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/***/.local/lib/python3.12/site-packages/***/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+  File "/home/***/.local/lib/python3.12/site-packages/***/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/***/.local/lib/python3.12/site-packages/***/providers/apache/spark/operators/spark_submit.py", line 176, in execute
+    self._hook.submit(self.application)
+  File "/home/***/.local/lib/python3.12/site-packages/***/providers/apache/spark/hooks/spark_submit.py", line 563, in submit
+    self._process_spark_submit_log(iter(self._submit_sp.stdout))  # type: ignore
+  File "/home/***/.local/lib/python3.12/site-packages/***/providers/apache/spark/hooks/spark_submit.py", line 612, in _process_spark_submit_log
+    for line in itr:
+  File "/home/***/.local/lib/python3.12/site-packages/***/models/taskinstance.py", line 3095, in signal_handler
+    self.log.error("Stacktrace: \n%s", "".join(traceback.format_stack()))
+
+[2025-04-27T10:59:51.338+0000] {spark_submit.py:775} INFO - Sending kill signal to spark-submit
+[2025-04-27T10:59:51.832+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-27T10:59:51.963+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=205, status='terminated', exitcode=0, started='10:58:44') (205) terminated with exit code 0
+[2025-04-27T10:59:51.999+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=207, status='terminated', started='10:58:45') (207) terminated with exit code None

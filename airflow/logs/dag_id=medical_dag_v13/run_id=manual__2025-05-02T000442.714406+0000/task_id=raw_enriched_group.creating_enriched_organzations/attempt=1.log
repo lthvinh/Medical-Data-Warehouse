@@ -1,0 +1,123 @@
+[2025-05-02T00:04:45.691+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-02T00:04:45.752+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: medical_dag_v13.raw_enriched_group.creating_enriched_organzations manual__2025-05-02T00:04:42.714406+00:00 [queued]>
+[2025-05-02T00:04:45.777+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: medical_dag_v13.raw_enriched_group.creating_enriched_organzations manual__2025-05-02T00:04:42.714406+00:00 [queued]>
+[2025-05-02T00:04:45.778+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-05-02T00:04:45.805+0000] {taskinstance.py:2890} INFO - Executing <Task(SparkSubmitOperator): raw_enriched_group.creating_enriched_organzations> on 2025-05-02 00:04:42.714406+00:00
+[2025-05-02T00:04:45.824+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'medical_dag_v13', 'raw_enriched_group.creating_enriched_organzations', 'manual__2025-05-02T00:04:42.714406+00:00', '--job-id', '89', '--raw', '--subdir', 'DAGS_FOLDER/raw_enriched_dag.py', '--cfg-path', '/tmp/tmplchte8u6']
+[2025-05-02T00:04:45.831+0000] {standard_task_runner.py:105} INFO - Job 89: Subtask raw_enriched_group.creating_enriched_organzations
+[2025-05-02T00:04:45.835+0000] {logging_mixin.py:190} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=432) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-05-02T00:04:45.836+0000] {standard_task_runner.py:72} INFO - Started process 433 to run task
+[2025-05-02T00:04:45.917+0000] {task_command.py:467} INFO - Running <TaskInstance: medical_dag_v13.raw_enriched_group.creating_enriched_organzations manual__2025-05-02T00:04:42.714406+00:00 [running]> on host airflow-scheduler
+[2025-05-02T00:04:46.067+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='medical_dag_v13' AIRFLOW_CTX_TASK_ID='raw_enriched_group.creating_enriched_organzations' AIRFLOW_CTX_EXECUTION_DATE='2025-05-02T00:04:42.714406+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-02T00:04:42.714406+00:00'
+[2025-05-02T00:04:46.069+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-02T00:04:46.142+0000] {base.py:84} INFO - Retrieving connection 'spark_conn'
+[2025-05-02T00:04:46.144+0000] {spark_submit.py:473} INFO - Spark-Submit cmd: spark-submit --master local --packages io.delta:delta-spark_2.12:3.3.0,org.apache.hadoop:hadoop-aws:3.3.4 --name arrow-spark --deploy-mode client /opt/etl/raw_enriched/creating_enriched_organzations.py
+[2025-05-02T00:04:49.089+0000] {spark_submit.py:649} INFO - :: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-05-02T00:04:49.200+0000] {spark_submit.py:649} INFO - Ivy Default Cache set to: /home/***/.ivy2/cache
+[2025-05-02T00:04:49.204+0000] {spark_submit.py:649} INFO - The jars for the packages stored in: /home/***/.ivy2/jars
+[2025-05-02T00:04:49.204+0000] {spark_submit.py:649} INFO - io.delta#delta-spark_2.12 added as a dependency
+[2025-05-02T00:04:49.205+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-aws added as a dependency
+[2025-05-02T00:04:49.205+0000] {spark_submit.py:649} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-64f4c78a-2ff4-4d98-9d70-964823e7a7cc;1.0
+[2025-05-02T00:04:49.206+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-05-02T00:04:49.402+0000] {spark_submit.py:649} INFO - found io.delta#delta-spark_2.12;3.3.0 in central
+[2025-05-02T00:04:49.438+0000] {spark_submit.py:649} INFO - found io.delta#delta-storage;3.3.0 in central
+[2025-05-02T00:04:49.460+0000] {spark_submit.py:649} INFO - found org.antlr#antlr4-runtime;4.9.3 in central
+[2025-05-02T00:04:49.522+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-aws;3.3.4 in central
+[2025-05-02T00:04:49.548+0000] {spark_submit.py:649} INFO - found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+[2025-05-02T00:04:49.577+0000] {spark_submit.py:649} INFO - found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+[2025-05-02T00:04:49.613+0000] {spark_submit.py:649} INFO - :: resolution report :: resolve 382ms :: artifacts dl 25ms
+[2025-05-02T00:04:49.613+0000] {spark_submit.py:649} INFO - :: modules in use:
+[2025-05-02T00:04:49.614+0000] {spark_submit.py:649} INFO - com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+[2025-05-02T00:04:49.615+0000] {spark_submit.py:649} INFO - io.delta#delta-spark_2.12;3.3.0 from central in [default]
+[2025-05-02T00:04:49.615+0000] {spark_submit.py:649} INFO - io.delta#delta-storage;3.3.0 from central in [default]
+[2025-05-02T00:04:49.616+0000] {spark_submit.py:649} INFO - org.antlr#antlr4-runtime;4.9.3 from central in [default]
+[2025-05-02T00:04:49.616+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+[2025-05-02T00:04:49.616+0000] {spark_submit.py:649} INFO - org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+[2025-05-02T00:04:49.617+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-02T00:04:49.617+0000] {spark_submit.py:649} INFO - |                  |            modules            ||   artifacts   |
+[2025-05-02T00:04:49.618+0000] {spark_submit.py:649} INFO - |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+[2025-05-02T00:04:49.618+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-02T00:04:49.619+0000] {spark_submit.py:649} INFO - |      default     |   6   |   0   |   0   |   0   ||   6   |   0   |
+[2025-05-02T00:04:49.620+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-02T00:04:49.625+0000] {spark_submit.py:649} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-64f4c78a-2ff4-4d98-9d70-964823e7a7cc
+[2025-05-02T00:04:49.625+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-05-02T00:04:49.636+0000] {spark_submit.py:649} INFO - 0 artifacts copied, 6 already retrieved (0kB/11ms)
+[2025-05-02T00:04:50.030+0000] {spark_submit.py:649} INFO - 25/05/02 00:04:50 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-05-02T00:04:50.609+0000] {spark_submit.py:649} INFO - python3: can't open file '/opt/etl/raw_enriched/creating_enriched_organzations.py': [Errno 2] No such file or directory
+[2025-05-02T00:04:50.620+0000] {spark_submit.py:649} INFO - 25/05/02 00:04:50 INFO ShutdownHookManager: Shutdown hook called
+[2025-05-02T00:04:50.620+0000] {spark_submit.py:649} INFO - 25/05/02 00:04:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-acd90818-1764-4527-aedc-6cfa2bf9d021
+[2025-05-02T00:04:50.668+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 176, in execute
+    self._hook.submit(self.application)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 575, in submit
+    raise AirflowException(
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master local --packages io.delta:delta-spark_2.12:3.3.0,org.apache.hadoop:hadoop-aws:3.3.4 --name arrow-spark --deploy-mode client /opt/etl/raw_enriched/creating_enriched_organzations.py. Error code is: 2.
+[2025-05-02T00:04:50.681+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=medical_dag_v13, task_id=raw_enriched_group.creating_enriched_organzations, run_id=manual__2025-05-02T00:04:42.714406+00:00, execution_date=20250502T000442, start_date=20250502T000445, end_date=20250502T000450
+[2025-05-02T00:04:50.722+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-02T00:04:50.724+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 89 for task raw_enriched_group.creating_enriched_organzations (Cannot execute: spark-submit --master local --packages io.delta:delta-spark_2.12:3.3.0,org.apache.hadoop:hadoop-aws:3.3.4 --name arrow-spark --deploy-mode client /opt/etl/raw_enriched/creating_enriched_organzations.py. Error code is: 2.; 433)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 176, in execute
+    self._hook.submit(self.application)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 575, in submit
+    raise AirflowException(
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master local --packages io.delta:delta-spark_2.12:3.3.0,org.apache.hadoop:hadoop-aws:3.3.4 --name arrow-spark --deploy-mode client /opt/etl/raw_enriched/creating_enriched_organzations.py. Error code is: 2.
+[2025-05-02T00:04:50.751+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-05-02T00:04:50.774+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-05-02T00:04:50.776+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

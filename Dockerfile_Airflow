@@ -1,0 +1,21 @@
+FROM apache/airflow:2.10.5-python3.12
+
+USER root
+
+RUN apt update \
+    && apt install -y \
+    && apt install default-jdk -y 
+
+COPY airflow/spark-3.5.3-bin-hadoop3 /opt/spark
+
+ENV SPARK_HOME=/opt/spark
+ENV PATH="$PATH:$SPARK_HOME/bin"
+
+COPY minio/minio-certs/public.crt /usr/local/share/ca-certificates/
+
+RUN update-ca-certificates
+
+USER airflow
+
+COPY airflow/packages/requirements.txt airflow/packages/constraints-3.8.txt ./
+RUN pip install -r requirements.txt -c constraints-3.8.txt

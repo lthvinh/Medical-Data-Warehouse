@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sat Apr 26 00:27:27 UTC 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0196-6f7d-f2bf-0000045083e0 
+on database directory /opt/airflow/dags/metastore_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5ffd2b27 
+Loaded from file:/opt/spark/jars/derby-10.14.2.0.jar
+java.vendor=Debian
+java.runtime.version=17.0.14+7-Debian-1deb12u1
+user.dir=/opt/airflow/dags
+os.name=Linux
+os.arch=amd64
+os.version=5.15.153.1-microsoft-standard-WSL2
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

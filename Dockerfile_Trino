@@ -1,0 +1,18 @@
+FROM trinodb/trino:latest
+
+USER root
+
+# COPY minio/minio-certs/public.crt /etc/pki/ca-trust/source/anchors/minio-cert.crt
+# COPY trino/trino-certs/public.crt /etc/pki/ca-trust/source/anchors/trino-cert.crt
+
+# RUN update-ca-trust extract
+
+COPY minio/minio-certs/public.crt /tmp/minio-cert.crt 
+COPY trino/trino-certs/public.crt /tmp/trino-cert.crt 
+
+RUN keytool -importcert -file /tmp/minio-cert.crt -alias minio-ca -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+RUN keytool -importcert -file /tmp/trino-cert.crt -alias trino-ca -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+
+USER trino
+
+WORKDIR /etc/trino
