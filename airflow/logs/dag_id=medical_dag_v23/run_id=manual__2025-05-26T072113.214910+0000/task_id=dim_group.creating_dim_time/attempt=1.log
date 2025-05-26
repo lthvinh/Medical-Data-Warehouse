@@ -1,0 +1,686 @@
+[2025-05-26T07:36:07.503+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-26T07:36:07.517+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: medical_dag_v23.dim_group.creating_dim_time manual__2025-05-26T07:21:13.214910+00:00 [queued]>
+[2025-05-26T07:36:07.525+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: medical_dag_v23.dim_group.creating_dim_time manual__2025-05-26T07:21:13.214910+00:00 [queued]>
+[2025-05-26T07:36:07.525+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-05-26T07:36:07.540+0000] {taskinstance.py:2890} INFO - Executing <Task(SparkSubmitOperator): dim_group.creating_dim_time> on 2025-05-26 07:21:13.214910+00:00
+[2025-05-26T07:36:07.546+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'medical_dag_v23', 'dim_group.creating_dim_time', 'manual__2025-05-26T07:21:13.214910+00:00', '--job-id', '176', '--raw', '--subdir', 'DAGS_FOLDER/raw_enriched_dag.py', '--cfg-path', '/tmp/tmpi3l8pzlk']
+[2025-05-26T07:36:07.548+0000] {standard_task_runner.py:105} INFO - Job 176: Subtask dim_group.creating_dim_time
+[2025-05-26T07:36:07.557+0000] {logging_mixin.py:190} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=47249) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-05-26T07:36:07.558+0000] {standard_task_runner.py:72} INFO - Started process 47252 to run task
+[2025-05-26T07:36:07.580+0000] {task_command.py:467} INFO - Running <TaskInstance: medical_dag_v23.dim_group.creating_dim_time manual__2025-05-26T07:21:13.214910+00:00 [running]> on host airflow-scheduler
+[2025-05-26T07:36:07.643+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='medical_dag_v23' AIRFLOW_CTX_TASK_ID='dim_group.creating_dim_time' AIRFLOW_CTX_EXECUTION_DATE='2025-05-26T07:21:13.214910+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-26T07:21:13.214910+00:00'
+[2025-05-26T07:36:07.644+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-26T07:36:07.663+0000] {base.py:84} INFO - Retrieving connection 'spark_conn'
+[2025-05-26T07:36:07.664+0000] {spark_submit.py:473} INFO - Spark-Submit cmd: spark-submit --master spark://spark-master:7077 --packages io.delta:delta-spark_2.12:3.3.0,org.apache.hadoop:hadoop-aws:3.3.4 --name arrow-spark --deploy-mode client /opt/etl/enriched_curated/creating_dim_time.py
+[2025-05-26T07:36:08.957+0000] {spark_submit.py:649} INFO - :: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-05-26T07:36:09.015+0000] {spark_submit.py:649} INFO - Ivy Default Cache set to: /home/airflow/.ivy2/cache
+[2025-05-26T07:36:09.016+0000] {spark_submit.py:649} INFO - The jars for the packages stored in: /home/airflow/.ivy2/jars
+[2025-05-26T07:36:09.019+0000] {spark_submit.py:649} INFO - io.delta#delta-spark_2.12 added as a dependency
+[2025-05-26T07:36:09.019+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-aws added as a dependency
+[2025-05-26T07:36:09.019+0000] {spark_submit.py:649} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-58a1aa6f-e0c5-4a1b-969f-a9307d995653;1.0
+[2025-05-26T07:36:09.020+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-05-26T07:36:09.111+0000] {spark_submit.py:649} INFO - found io.delta#delta-spark_2.12;3.3.0 in central
+[2025-05-26T07:36:09.145+0000] {spark_submit.py:649} INFO - found io.delta#delta-storage;3.3.0 in central
+[2025-05-26T07:36:09.172+0000] {spark_submit.py:649} INFO - found org.antlr#antlr4-runtime;4.9.3 in spark-list
+[2025-05-26T07:36:09.214+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-aws;3.3.4 in central
+[2025-05-26T07:36:09.233+0000] {spark_submit.py:649} INFO - found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+[2025-05-26T07:36:09.249+0000] {spark_submit.py:649} INFO - found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+[2025-05-26T07:36:09.272+0000] {spark_submit.py:649} INFO - :: resolution report :: resolve 240ms :: artifacts dl 13ms
+[2025-05-26T07:36:09.273+0000] {spark_submit.py:649} INFO - :: modules in use:
+[2025-05-26T07:36:09.274+0000] {spark_submit.py:649} INFO - com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+[2025-05-26T07:36:09.275+0000] {spark_submit.py:649} INFO - io.delta#delta-spark_2.12;3.3.0 from central in [default]
+[2025-05-26T07:36:09.275+0000] {spark_submit.py:649} INFO - io.delta#delta-storage;3.3.0 from central in [default]
+[2025-05-26T07:36:09.276+0000] {spark_submit.py:649} INFO - org.antlr#antlr4-runtime;4.9.3 from spark-list in [default]
+[2025-05-26T07:36:09.276+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+[2025-05-26T07:36:09.276+0000] {spark_submit.py:649} INFO - org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+[2025-05-26T07:36:09.277+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-26T07:36:09.277+0000] {spark_submit.py:649} INFO - |                  |            modules            ||   artifacts   |
+[2025-05-26T07:36:09.277+0000] {spark_submit.py:649} INFO - |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+[2025-05-26T07:36:09.278+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-26T07:36:09.278+0000] {spark_submit.py:649} INFO - |      default     |   6   |   0   |   0   |   0   ||   6   |   0   |
+[2025-05-26T07:36:09.279+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-26T07:36:09.279+0000] {spark_submit.py:649} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-58a1aa6f-e0c5-4a1b-969f-a9307d995653
+[2025-05-26T07:36:09.280+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-05-26T07:36:09.286+0000] {spark_submit.py:649} INFO - 0 artifacts copied, 6 already retrieved (0kB/7ms)
+[2025-05-26T07:36:09.421+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:09 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-05-26T07:36:11.665+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SparkContext: Running Spark version 3.5.3
+[2025-05-26T07:36:11.665+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SparkContext: OS info Linux, 5.15.167.4-microsoft-standard-WSL2, amd64
+[2025-05-26T07:36:11.666+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SparkContext: Java version 17.0.15
+[2025-05-26T07:36:11.684+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO ResourceUtils: ==============================================================
+[2025-05-26T07:36:11.685+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO ResourceUtils: No custom resources configured for spark.driver.
+[2025-05-26T07:36:11.685+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO ResourceUtils: ==============================================================
+[2025-05-26T07:36:11.685+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SparkContext: Submitted application: MyETLPipeline
+[2025-05-26T07:36:11.693+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+[2025-05-26T07:36:11.697+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO ResourceProfile: Limiting resource is cpu
+[2025-05-26T07:36:11.698+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO ResourceProfileManager: Added ResourceProfile id: 0
+[2025-05-26T07:36:11.724+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SecurityManager: Changing view acls to: airflow
+[2025-05-26T07:36:11.724+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SecurityManager: Changing modify acls to: airflow
+[2025-05-26T07:36:11.725+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SecurityManager: Changing view acls groups to:
+[2025-05-26T07:36:11.725+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SecurityManager: Changing modify acls groups to:
+[2025-05-26T07:36:11.725+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: airflow; groups with view permissions: EMPTY; users with modify permissions: airflow; groups with modify permissions: EMPTY
+[2025-05-26T07:36:11.849+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO Utils: Successfully started service 'sparkDriver' on port 35165.
+[2025-05-26T07:36:11.872+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SparkEnv: Registering MapOutputTracker
+[2025-05-26T07:36:11.895+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SparkEnv: Registering BlockManagerMaster
+[2025-05-26T07:36:11.903+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+[2025-05-26T07:36:11.904+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+[2025-05-26T07:36:11.906+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+[2025-05-26T07:36:11.915+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-11220465-6505-4905-ae88-c433d771f34a
+[2025-05-26T07:36:11.923+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+[2025-05-26T07:36:11.930+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO SparkEnv: Registering OutputCommitCoordinator
+[2025-05-26T07:36:11.996+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:11 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+[2025-05-26T07:36:12.029+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+[2025-05-26T07:36:12.050+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added JAR file:///home/airflow/.ivy2/jars/io.delta_delta-spark_2.12-3.3.0.jar at spark://airflow-scheduler:35165/jars/io.delta_delta-spark_2.12-3.3.0.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.050+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added JAR file:///home/airflow/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar at spark://airflow-scheduler:35165/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.050+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added JAR file:///home/airflow/.ivy2/jars/io.delta_delta-storage-3.3.0.jar at spark://airflow-scheduler:35165/jars/io.delta_delta-storage-3.3.0.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.051+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added JAR file:///home/airflow/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar at spark://airflow-scheduler:35165/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.051+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added JAR file:///home/airflow/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar at spark://airflow-scheduler:35165/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.051+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added JAR file:///home/airflow/.ivy2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar at spark://airflow-scheduler:35165/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.052+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added file file:///home/airflow/.ivy2/jars/io.delta_delta-spark_2.12-3.3.0.jar at spark://airflow-scheduler:35165/files/io.delta_delta-spark_2.12-3.3.0.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.052+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO Utils: Copying /home/airflow/.ivy2/jars/io.delta_delta-spark_2.12-3.3.0.jar to /tmp/spark-22c5c0d6-a4e6-4fa6-882a-fd21fb70e631/userFiles-0077da76-6cf3-4028-89bb-d3cc39602a89/io.delta_delta-spark_2.12-3.3.0.jar
+[2025-05-26T07:36:12.064+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added file file:///home/airflow/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar at spark://airflow-scheduler:35165/files/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.065+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO Utils: Copying /home/airflow/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar to /tmp/spark-22c5c0d6-a4e6-4fa6-882a-fd21fb70e631/userFiles-0077da76-6cf3-4028-89bb-d3cc39602a89/org.apache.hadoop_hadoop-aws-3.3.4.jar
+[2025-05-26T07:36:12.067+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added file file:///home/airflow/.ivy2/jars/io.delta_delta-storage-3.3.0.jar at spark://airflow-scheduler:35165/files/io.delta_delta-storage-3.3.0.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.068+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO Utils: Copying /home/airflow/.ivy2/jars/io.delta_delta-storage-3.3.0.jar to /tmp/spark-22c5c0d6-a4e6-4fa6-882a-fd21fb70e631/userFiles-0077da76-6cf3-4028-89bb-d3cc39602a89/io.delta_delta-storage-3.3.0.jar
+[2025-05-26T07:36:12.070+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added file file:///home/airflow/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar at spark://airflow-scheduler:35165/files/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.070+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO Utils: Copying /home/airflow/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar to /tmp/spark-22c5c0d6-a4e6-4fa6-882a-fd21fb70e631/userFiles-0077da76-6cf3-4028-89bb-d3cc39602a89/org.antlr_antlr4-runtime-4.9.3.jar
+[2025-05-26T07:36:12.072+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added file file:///home/airflow/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar at spark://airflow-scheduler:35165/files/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.073+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO Utils: Copying /home/airflow/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to /tmp/spark-22c5c0d6-a4e6-4fa6-882a-fd21fb70e631/userFiles-0077da76-6cf3-4028-89bb-d3cc39602a89/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar
+[2025-05-26T07:36:12.292+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SparkContext: Added file file:///home/airflow/.ivy2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar at spark://airflow-scheduler:35165/files/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1748244971661
+[2025-05-26T07:36:12.293+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO Utils: Copying /home/airflow/.ivy2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to /tmp/spark-22c5c0d6-a4e6-4fa6-882a-fd21fb70e631/userFiles-0077da76-6cf3-4028-89bb-d3cc39602a89/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar
+[2025-05-26T07:36:12.333+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
+[2025-05-26T07:36:12.354+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO TransportClientFactory: Successfully created connection to spark-master/172.18.0.8:7077 after 12 ms (0 ms spent in bootstraps)
+[2025-05-26T07:36:12.395+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20250526073612-0100
+[2025-05-26T07:36:12.400+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 33179.
+[2025-05-26T07:36:12.400+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO NettyBlockTransferService: Server created on airflow-scheduler:33179
+[2025-05-26T07:36:12.401+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+[2025-05-26T07:36:12.404+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, airflow-scheduler, 33179, None)
+[2025-05-26T07:36:12.405+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO BlockManagerMasterEndpoint: Registering block manager airflow-scheduler:33179 with 434.4 MiB RAM, BlockManagerId(driver, airflow-scheduler, 33179, None)
+[2025-05-26T07:36:12.406+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, airflow-scheduler, 33179, None)
+[2025-05-26T07:36:12.407+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, airflow-scheduler, 33179, None)
+[2025-05-26T07:36:12.485+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+[2025-05-26T07:36:12.610+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
+[2025-05-26T07:36:12.611+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:12 INFO SharedState: Warehouse path is 'file:/opt/airflow/spark-warehouse'.
+[2025-05-26T07:36:13.036+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:13 INFO HiveConf: Found configuration file null
+[2025-05-26T07:36:13.041+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:13 INFO HiveUtils: Initializing HiveMetastoreConnection version 3.1.3 using maven.
+[2025-05-26T07:36:13.045+0000] {spark_submit.py:649} INFO - https://maven-central.storage-download.googleapis.com/maven2/ added as a remote repository with the name: repo-1
+[2025-05-26T07:36:13.046+0000] {spark_submit.py:649} INFO - https://maven-central.storage-download.googleapis.com/maven2/ added as a remote repository with the name: repo-1
+[2025-05-26T07:36:13.054+0000] {spark_submit.py:649} INFO - Ivy Default Cache set to: /home/airflow/.ivy2/cache
+[2025-05-26T07:36:13.054+0000] {spark_submit.py:649} INFO - The jars for the packages stored in: /home/airflow/.ivy2/jars
+[2025-05-26T07:36:13.055+0000] {spark_submit.py:649} INFO - org.apache.logging.log4j#log4j-api added as a dependency
+[2025-05-26T07:36:13.055+0000] {spark_submit.py:649} INFO - org.apache.derby#derby added as a dependency
+[2025-05-26T07:36:13.055+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-metastore added as a dependency
+[2025-05-26T07:36:13.055+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-exec added as a dependency
+[2025-05-26T07:36:13.056+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-common added as a dependency
+[2025-05-26T07:36:13.056+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-serde added as a dependency
+[2025-05-26T07:36:13.056+0000] {spark_submit.py:649} INFO - com.google.guava#guava added as a dependency
+[2025-05-26T07:36:13.056+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-client-api added as a dependency
+[2025-05-26T07:36:13.057+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-client-runtime added as a dependency
+[2025-05-26T07:36:13.057+0000] {spark_submit.py:649} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-12d695fa-7712-4fb7-b86e-4f7b4bec487b;1.0
+[2025-05-26T07:36:13.057+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-05-26T07:36:13.065+0000] {spark_submit.py:649} INFO - found org.apache.logging.log4j#log4j-api;2.10.0 in user-list
+[2025-05-26T07:36:13.071+0000] {spark_submit.py:649} INFO - found org.apache.derby#derby;10.14.1.0 in user-list
+[2025-05-26T07:36:13.080+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-metastore;3.1.3 in user-list
+[2025-05-26T07:36:13.092+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-serde;3.1.3 in central
+[2025-05-26T07:36:13.107+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-common;3.1.3 in central
+[2025-05-26T07:36:13.119+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-classification;3.1.3 in central
+[2025-05-26T07:36:13.126+0000] {spark_submit.py:649} INFO - found org.slf4j#slf4j-api;1.7.10 in user-list
+[2025-05-26T07:36:13.134+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-upgrade-acid;3.1.3 in central
+[2025-05-26T07:36:13.143+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-shims;3.1.3 in central
+[2025-05-26T07:36:13.152+0000] {spark_submit.py:649} INFO - found org.apache.hive.shims#hive-shims-common;3.1.3 in central
+[2025-05-26T07:36:13.160+0000] {spark_submit.py:649} INFO - found org.apache.logging.log4j#log4j-slf4j-impl;2.17.1 in central
+[2025-05-26T07:36:13.168+0000] {spark_submit.py:649} INFO - found com.google.guava#guava;19.0 in central
+[2025-05-26T07:36:13.174+0000] {spark_submit.py:649} INFO - found commons-lang#commons-lang;2.6 in central
+[2025-05-26T07:36:13.185+0000] {spark_submit.py:649} INFO - found org.apache.thrift#libthrift;0.9.3 in central
+[2025-05-26T07:36:13.192+0000] {spark_submit.py:649} INFO - found org.apache.httpcomponents#httpclient;4.5.13 in central
+[2025-05-26T07:36:13.200+0000] {spark_submit.py:649} INFO - found org.apache.httpcomponents#httpcore;4.4.13 in central
+[2025-05-26T07:36:13.207+0000] {spark_submit.py:649} INFO - found commons-logging#commons-logging;1.2 in user-list
+[2025-05-26T07:36:13.214+0000] {spark_submit.py:649} INFO - found commons-codec#commons-codec;1.15 in central
+[2025-05-26T07:36:13.221+0000] {spark_submit.py:649} INFO - found org.apache.zookeeper#zookeeper;3.4.6 in user-list
+[2025-05-26T07:36:13.228+0000] {spark_submit.py:649} INFO - found org.slf4j#slf4j-log4j12;1.6.1 in user-list
+[2025-05-26T07:36:13.234+0000] {spark_submit.py:649} INFO - found log4j#log4j;1.2.16 in user-list
+[2025-05-26T07:36:13.240+0000] {spark_submit.py:649} INFO - found jline#jline;2.12 in central
+[2025-05-26T07:36:13.249+0000] {spark_submit.py:649} INFO - found io.netty#netty;3.7.0.Final in user-list
+[2025-05-26T07:36:13.259+0000] {spark_submit.py:649} INFO - found org.apache.logging.log4j#log4j-core;2.17.1 in central
+[2025-05-26T07:36:13.268+0000] {spark_submit.py:649} INFO - found org.apache.hive.shims#hive-shims-0.23;3.1.3 in central
+[2025-05-26T07:36:13.279+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-yarn-server-resourcemanager;3.1.0 in central
+[2025-05-26T07:36:13.288+0000] {spark_submit.py:649} INFO - found javax.servlet#javax.servlet-api;3.1.0 in central
+[2025-05-26T07:36:13.299+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-annotations;3.1.0 in central
+[2025-05-26T07:36:13.307+0000] {spark_submit.py:649} INFO - found com.google.inject.extensions#guice-servlet;4.0 in central
+[2025-05-26T07:36:13.317+0000] {spark_submit.py:649} INFO - found com.google.inject#guice;4.0 in central
+[2025-05-26T07:36:13.324+0000] {spark_submit.py:649} INFO - found javax.inject#javax.inject;1 in user-list
+[2025-05-26T07:36:13.331+0000] {spark_submit.py:649} INFO - found aopalliance#aopalliance;1.0 in user-list
+[2025-05-26T07:36:13.340+0000] {spark_submit.py:649} INFO - found com.google.protobuf#protobuf-java;2.5.0 in central
+[2025-05-26T07:36:13.347+0000] {spark_submit.py:649} INFO - found commons-io#commons-io;2.6 in user-list
+[2025-05-26T07:36:13.354+0000] {spark_submit.py:649} INFO - found com.sun.jersey#jersey-json;1.19 in user-list
+[2025-05-26T07:36:13.362+0000] {spark_submit.py:649} INFO - found org.codehaus.jettison#jettison;1.1 in central
+[2025-05-26T07:36:13.373+0000] {spark_submit.py:649} INFO - found com.sun.xml.bind#jaxb-impl;2.2.3-1 in central
+[2025-05-26T07:36:13.381+0000] {spark_submit.py:649} INFO - found javax.xml.bind#jaxb-api;2.2.11 in central
+[2025-05-26T07:36:13.459+0000] {spark_submit.py:649} INFO - found org.codehaus.jackson#jackson-core-asl;1.9.13 in central
+[2025-05-26T07:36:13.467+0000] {spark_submit.py:649} INFO - found org.codehaus.jackson#jackson-mapper-asl;1.9.13 in user-list
+[2025-05-26T07:36:13.473+0000] {spark_submit.py:649} INFO - found org.codehaus.jackson#jackson-jaxrs;1.9.13 in central
+[2025-05-26T07:36:13.480+0000] {spark_submit.py:649} INFO - found org.codehaus.jackson#jackson-xc;1.9.13 in user-list
+[2025-05-26T07:36:13.486+0000] {spark_submit.py:649} INFO - found com.sun.jersey#jersey-core;1.19 in user-list
+[2025-05-26T07:36:13.495+0000] {spark_submit.py:649} INFO - found javax.ws.rs#jsr311-api;1.1.1 in user-list
+[2025-05-26T07:36:13.504+0000] {spark_submit.py:649} INFO - found com.sun.jersey.contribs#jersey-guice;1.19 in user-list
+[2025-05-26T07:36:13.514+0000] {spark_submit.py:649} INFO - found com.sun.jersey#jersey-servlet;1.19 in central
+[2025-05-26T07:36:13.526+0000] {spark_submit.py:649} INFO - found com.sun.jersey#jersey-server;1.19 in central
+[2025-05-26T07:36:13.539+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-yarn-common;3.1.0 in central
+[2025-05-26T07:36:13.550+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-yarn-api;3.1.0 in user-list
+[2025-05-26T07:36:13.571+0000] {spark_submit.py:649} INFO - found com.fasterxml.jackson.core#jackson-annotations;2.12.0 in user-list
+[2025-05-26T07:36:13.582+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-auth;3.1.0 in central
+[2025-05-26T07:36:13.602+0000] {spark_submit.py:649} INFO - found com.nimbusds#nimbus-jose-jwt;4.41.1 in central
+[2025-05-26T07:36:13.611+0000] {spark_submit.py:649} INFO - found com.github.stephenc.jcip#jcip-annotations;1.0-1 in user-list
+[2025-05-26T07:36:13.619+0000] {spark_submit.py:649} INFO - found net.minidev#json-smart;2.3 in central
+[2025-05-26T07:36:13.627+0000] {spark_submit.py:649} INFO - found net.minidev#accessors-smart;1.2 in central
+[2025-05-26T07:36:13.634+0000] {spark_submit.py:649} INFO - found org.ow2.asm#asm;5.0.4 in central
+[2025-05-26T07:36:13.645+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-simplekdc;1.0.1 in central
+[2025-05-26T07:36:13.653+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-client;1.0.1 in central
+[2025-05-26T07:36:13.664+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerby-config;1.0.1 in central
+[2025-05-26T07:36:13.673+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-core;1.0.1 in user-list
+[2025-05-26T07:36:13.680+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerby-pkix;1.0.1 in central
+[2025-05-26T07:36:13.688+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerby-asn1;1.0.1 in central
+[2025-05-26T07:36:13.696+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerby-util;1.0.1 in central
+[2025-05-26T07:36:13.703+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-common;1.0.1 in central
+[2025-05-26T07:36:13.712+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-crypto;1.0.1 in central
+[2025-05-26T07:36:13.723+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-util;1.0.1 in user-list
+[2025-05-26T07:36:13.733+0000] {spark_submit.py:649} INFO - found org.apache.kerby#token-provider;1.0.1 in user-list
+[2025-05-26T07:36:13.741+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-admin;1.0.1 in user-list
+[2025-05-26T07:36:13.748+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-server;1.0.1 in central
+[2025-05-26T07:36:13.755+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerb-identity;1.0.1 in user-list
+[2025-05-26T07:36:13.762+0000] {spark_submit.py:649} INFO - found org.apache.kerby#kerby-xdr;1.0.1 in central
+[2025-05-26T07:36:13.769+0000] {spark_submit.py:649} INFO - found org.apache.commons#commons-compress;1.19 in central
+[2025-05-26T07:36:13.775+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-util;9.3.19.v20170502 in user-list
+[2025-05-26T07:36:13.782+0000] {spark_submit.py:649} INFO - found com.sun.jersey#jersey-client;1.19 in central
+[2025-05-26T07:36:13.791+0000] {spark_submit.py:649} INFO - found commons-cli#commons-cli;1.2 in user-list
+[2025-05-26T07:36:13.801+0000] {spark_submit.py:649} INFO - found log4j#log4j;1.2.17 in central
+[2025-05-26T07:36:13.807+0000] {spark_submit.py:649} INFO - found com.fasterxml.jackson.core#jackson-core;2.12.0 in central
+[2025-05-26T07:36:13.813+0000] {spark_submit.py:649} INFO - found com.fasterxml.jackson.core#jackson-databind;2.12.0 in user-list
+[2025-05-26T07:36:13.820+0000] {spark_submit.py:649} INFO - found com.fasterxml.jackson.module#jackson-module-jaxb-annotations;2.12.0 in central
+[2025-05-26T07:36:13.828+0000] {spark_submit.py:649} INFO - found jakarta.xml.bind#jakarta.xml.bind-api;2.3.2 in central
+[2025-05-26T07:36:13.834+0000] {spark_submit.py:649} INFO - found jakarta.activation#jakarta.activation-api;1.2.1 in user-list
+[2025-05-26T07:36:13.841+0000] {spark_submit.py:649} INFO - found com.fasterxml.jackson.jaxrs#jackson-jaxrs-json-provider;2.12.0 in central
+[2025-05-26T07:36:13.848+0000] {spark_submit.py:649} INFO - found com.fasterxml.jackson.jaxrs#jackson-jaxrs-base;2.12.0 in user-list
+[2025-05-26T07:36:13.856+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-util-ajax;9.3.19.v20170502 in central
+[2025-05-26T07:36:13.864+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-yarn-server-common;3.1.0 in user-list
+[2025-05-26T07:36:13.872+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-yarn-registry;3.1.0 in central
+[2025-05-26T07:36:13.886+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-common;3.1.0 in central
+[2025-05-26T07:36:13.904+0000] {spark_submit.py:649} INFO - found org.apache.commons#commons-math3;3.1.1 in central
+[2025-05-26T07:36:13.927+0000] {spark_submit.py:649} INFO - found commons-net#commons-net;3.6 in central
+[2025-05-26T07:36:13.940+0000] {spark_submit.py:649} INFO - found commons-collections#commons-collections;3.2.2 in user-list
+[2025-05-26T07:36:13.951+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-server;9.3.20.v20170531 in central
+[2025-05-26T07:36:13.959+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-http;9.3.20.v20170531 in central
+[2025-05-26T07:36:13.970+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-io;9.3.20.v20170531 in user-list
+[2025-05-26T07:36:13.977+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-servlet;9.3.20.v20170531 in user-list
+[2025-05-26T07:36:13.988+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-security;9.3.20.v20170531 in central
+[2025-05-26T07:36:13.996+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-webapp;9.3.20.v20170531 in central
+[2025-05-26T07:36:14.004+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-xml;9.3.20.v20170531 in central
+[2025-05-26T07:36:14.029+0000] {spark_submit.py:649} INFO - found commons-beanutils#commons-beanutils;1.9.3 in central
+[2025-05-26T07:36:14.038+0000] {spark_submit.py:649} INFO - found org.apache.commons#commons-configuration2;2.1.1 in central
+[2025-05-26T07:36:14.057+0000] {spark_submit.py:649} INFO - found org.apache.avro#avro;1.8.2 in central
+[2025-05-26T07:36:14.070+0000] {spark_submit.py:649} INFO - found com.thoughtworks.paranamer#paranamer;2.7 in central
+[2025-05-26T07:36:14.078+0000] {spark_submit.py:649} INFO - found org.xerial.snappy#snappy-java;1.1.4 in central
+[2025-05-26T07:36:14.088+0000] {spark_submit.py:649} INFO - found org.tukaani#xz;1.5 in central
+[2025-05-26T07:36:14.096+0000] {spark_submit.py:649} INFO - found com.google.re2j#re2j;1.1 in central
+[2025-05-26T07:36:14.109+0000] {spark_submit.py:649} INFO - found com.google.code.gson#gson;2.2.4 in central
+[2025-05-26T07:36:14.118+0000] {spark_submit.py:649} INFO - found com.jcraft#jsch;0.1.54 in user-list
+[2025-05-26T07:36:14.125+0000] {spark_submit.py:649} INFO - found com.google.code.findbugs#jsr305;3.0.0 in user-list
+[2025-05-26T07:36:14.134+0000] {spark_submit.py:649} INFO - found org.apache.htrace#htrace-core4;4.1.0-incubating in user-list
+[2025-05-26T07:36:14.149+0000] {spark_submit.py:649} INFO - found org.codehaus.woodstox#stax2-api;3.1.4 in central
+[2025-05-26T07:36:14.158+0000] {spark_submit.py:649} INFO - found com.fasterxml.woodstox#woodstox-core;5.0.3 in central
+[2025-05-26T07:36:14.164+0000] {spark_submit.py:649} INFO - found commons-daemon#commons-daemon;1.0.13 in user-list
+[2025-05-26T07:36:14.176+0000] {spark_submit.py:649} INFO - found dnsjava#dnsjava;2.1.7 in central
+[2025-05-26T07:36:14.181+0000] {spark_submit.py:649} INFO - found org.fusesource.leveldbjni#leveldbjni-all;1.8 in central
+[2025-05-26T07:36:14.186+0000] {spark_submit.py:649} INFO - found org.apache.geronimo.specs#geronimo-jcache_1.0_spec;1.0-alpha-1 in central
+[2025-05-26T07:36:14.191+0000] {spark_submit.py:649} INFO - found org.ehcache#ehcache;3.3.1 in user-list
+[2025-05-26T07:36:14.197+0000] {spark_submit.py:649} INFO - found com.zaxxer#HikariCP-java7;2.4.12 in user-list
+[2025-05-26T07:36:14.204+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-yarn-server-applicationhistoryservice;3.1.0 in central
+[2025-05-26T07:36:14.219+0000] {spark_submit.py:649} INFO - found de.ruedigermoeller#fst;2.50 in central
+[2025-05-26T07:36:14.225+0000] {spark_submit.py:649} INFO - found com.cedarsoftware#java-util;1.9.0 in central
+[2025-05-26T07:36:14.231+0000] {spark_submit.py:649} INFO - found com.cedarsoftware#json-io;2.5.1 in central
+[2025-05-26T07:36:14.238+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-yarn-server-web-proxy;3.1.0 in central
+[2025-05-26T07:36:14.279+0000] {spark_submit.py:649} INFO - found javax.servlet.jsp#jsp-api;2.1 in central
+[2025-05-26T07:36:14.288+0000] {spark_submit.py:649} INFO - found com.microsoft.sqlserver#mssql-jdbc;6.2.1.jre7 in central
+[2025-05-26T07:36:14.295+0000] {spark_submit.py:649} INFO - found org.apache.hive.shims#hive-shims-scheduler;3.1.3 in central
+[2025-05-26T07:36:14.300+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-storage-api;2.7.0 in central
+[2025-05-26T07:36:14.303+0000] {spark_submit.py:649} INFO - found org.apache.commons#commons-lang3;3.9 in user-list
+[2025-05-26T07:36:14.307+0000] {spark_submit.py:649} INFO - found org.apache.orc#orc-core;1.5.8 in user-list
+[2025-05-26T07:36:14.312+0000] {spark_submit.py:649} INFO - found org.apache.orc#orc-shims;1.5.8 in central
+[2025-05-26T07:36:14.317+0000] {spark_submit.py:649} INFO - found io.airlift#aircompressor;0.10 in user-list
+[2025-05-26T07:36:14.321+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-rewrite;9.3.20.v20170531 in central
+[2025-05-26T07:36:14.324+0000] {spark_submit.py:649} INFO - found org.eclipse.jetty#jetty-client;9.3.20.v20170531 in central
+[2025-05-26T07:36:14.328+0000] {spark_submit.py:649} INFO - found joda-time#joda-time;2.9.9 in central
+[2025-05-26T07:36:14.333+0000] {spark_submit.py:649} INFO - found org.apache.logging.log4j#log4j-1.2-api;2.17.1 in central
+[2025-05-26T07:36:14.341+0000] {spark_submit.py:649} INFO - found org.apache.logging.log4j#log4j-web;2.17.1 in central
+[2025-05-26T07:36:14.345+0000] {spark_submit.py:649} INFO - found org.apache.ant#ant;1.9.1 in central
+[2025-05-26T07:36:14.349+0000] {spark_submit.py:649} INFO - found org.apache.ant#ant-launcher;1.9.1 in central
+[2025-05-26T07:36:14.352+0000] {spark_submit.py:649} INFO - found net.sf.jpam#jpam;1.1 in user-list
+[2025-05-26T07:36:14.355+0000] {spark_submit.py:649} INFO - found com.tdunning#json;1.8 in user-list
+[2025-05-26T07:36:14.359+0000] {spark_submit.py:649} INFO - found io.dropwizard.metrics#metrics-core;3.1.0 in user-list
+[2025-05-26T07:36:14.362+0000] {spark_submit.py:649} INFO - found io.dropwizard.metrics#metrics-jvm;3.1.0 in central
+[2025-05-26T07:36:14.366+0000] {spark_submit.py:649} INFO - found io.dropwizard.metrics#metrics-json;3.1.0 in central
+[2025-05-26T07:36:14.369+0000] {spark_submit.py:649} INFO - found com.github.joshelser#dropwizard-metrics-hadoop-metrics2-reporter;0.1.2 in central
+[2025-05-26T07:36:14.373+0000] {spark_submit.py:649} INFO - found javolution#javolution;5.5.1 in central
+[2025-05-26T07:36:14.380+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-service-rpc;3.1.3 in central
+[2025-05-26T07:36:14.383+0000] {spark_submit.py:649} INFO - found org.apache.thrift#libfb303;0.9.3 in central
+[2025-05-26T07:36:14.387+0000] {spark_submit.py:649} INFO - found org.apache.arrow#arrow-vector;0.8.0 in central
+[2025-05-26T07:36:14.391+0000] {spark_submit.py:649} INFO - found org.apache.arrow#arrow-format;0.8.0 in central
+[2025-05-26T07:36:14.394+0000] {spark_submit.py:649} INFO - found com.vlkan#flatbuffers;1.2.0-3f79e055 in central
+[2025-05-26T07:36:14.397+0000] {spark_submit.py:649} INFO - found org.apache.arrow#arrow-memory;0.8.0 in user-list
+[2025-05-26T07:36:14.402+0000] {spark_submit.py:649} INFO - found io.netty#netty-buffer;4.1.17.Final in central
+[2025-05-26T07:36:14.405+0000] {spark_submit.py:649} INFO - found io.netty#netty-common;4.1.17.Final in central
+[2025-05-26T07:36:14.410+0000] {spark_submit.py:649} INFO - found com.carrotsearch#hppc;0.7.2 in user-list
+[2025-05-26T07:36:14.413+0000] {spark_submit.py:649} INFO - found net.sf.opencsv#opencsv;2.3 in central
+[2025-05-26T07:36:14.416+0000] {spark_submit.py:649} INFO - found org.apache.parquet#parquet-hadoop-bundle;1.10.0 in central
+[2025-05-26T07:36:14.421+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-standalone-metastore;3.1.3 in central
+[2025-05-26T07:36:14.426+0000] {spark_submit.py:649} INFO - found com.jolbox#bonecp;0.8.0.RELEASE in central
+[2025-05-26T07:36:14.430+0000] {spark_submit.py:649} INFO - found com.zaxxer#HikariCP;2.6.1 in central
+[2025-05-26T07:36:14.434+0000] {spark_submit.py:649} INFO - found commons-dbcp#commons-dbcp;1.4 in central
+[2025-05-26T07:36:14.440+0000] {spark_submit.py:649} INFO - found commons-pool#commons-pool;1.5.4 in central
+[2025-05-26T07:36:14.446+0000] {spark_submit.py:649} INFO - found org.antlr#antlr-runtime;3.5.2 in central
+[2025-05-26T07:36:14.453+0000] {spark_submit.py:649} INFO - found org.datanucleus#datanucleus-api-jdo;4.2.4 in user-list
+[2025-05-26T07:36:14.456+0000] {spark_submit.py:649} INFO - found org.datanucleus#datanucleus-core;4.1.17 in user-list
+[2025-05-26T07:36:14.459+0000] {spark_submit.py:649} INFO - found org.datanucleus#datanucleus-rdbms;4.1.19 in central
+[2025-05-26T07:36:14.462+0000] {spark_submit.py:649} INFO - found org.datanucleus#javax.jdo;3.2.0-m3 in central
+[2025-05-26T07:36:14.465+0000] {spark_submit.py:649} INFO - found javax.transaction#transaction-api;1.1 in central
+[2025-05-26T07:36:14.469+0000] {spark_submit.py:649} INFO - found sqlline#sqlline;1.3.0 in user-list
+[2025-05-26T07:36:14.475+0000] {spark_submit.py:649} INFO - found org.apache.hbase#hbase-client;2.0.0-alpha4 in central
+[2025-05-26T07:36:14.479+0000] {spark_submit.py:649} INFO - found org.apache.hbase.thirdparty#hbase-shaded-protobuf;1.0.1 in central
+[2025-05-26T07:36:14.484+0000] {spark_submit.py:649} INFO - found org.apache.hbase#hbase-protocol-shaded;2.0.0-alpha4 in central
+[2025-05-26T07:36:14.487+0000] {spark_submit.py:649} INFO - found org.apache.yetus#audience-annotations;0.5.0 in central
+[2025-05-26T07:36:14.490+0000] {spark_submit.py:649} INFO - found junit#junit;4.11 in central
+[2025-05-26T07:36:14.493+0000] {spark_submit.py:649} INFO - found org.hamcrest#hamcrest-core;1.3 in central
+[2025-05-26T07:36:14.498+0000] {spark_submit.py:649} INFO - found org.apache.hbase#hbase-protocol;2.0.0-alpha4 in user-list
+[2025-05-26T07:36:14.505+0000] {spark_submit.py:649} INFO - found org.apache.hbase.thirdparty#hbase-shaded-miscellaneous;1.0.1 in central
+[2025-05-26T07:36:14.508+0000] {spark_submit.py:649} INFO - found org.apache.hbase.thirdparty#hbase-shaded-netty;1.0.1 in central
+[2025-05-26T07:36:14.511+0000] {spark_submit.py:649} INFO - found org.apache.htrace#htrace-core;3.2.0-incubating in central
+[2025-05-26T07:36:14.514+0000] {spark_submit.py:649} INFO - found org.jruby.jcodings#jcodings;1.0.18 in central
+[2025-05-26T07:36:14.517+0000] {spark_submit.py:649} INFO - found org.jruby.joni#joni;2.1.11 in central
+[2025-05-26T07:36:14.519+0000] {spark_submit.py:649} INFO - found io.dropwizard.metrics#metrics-core;3.2.1 in central
+[2025-05-26T07:36:14.523+0000] {spark_submit.py:649} INFO - found org.apache.commons#commons-crypto;1.0.0 in central
+[2025-05-26T07:36:14.529+0000] {spark_submit.py:649} INFO - found javax.jdo#jdo-api;3.0.1 in central
+[2025-05-26T07:36:14.531+0000] {spark_submit.py:649} INFO - found javax.transaction#jta;1.1 in user-list
+[2025-05-26T07:36:14.534+0000] {spark_submit.py:649} INFO - found co.cask.tephra#tephra-api;0.6.0 in central
+[2025-05-26T07:36:14.536+0000] {spark_submit.py:649} INFO - found co.cask.tephra#tephra-core;0.6.0 in central
+[2025-05-26T07:36:14.544+0000] {spark_submit.py:649} INFO - found com.google.inject.extensions#guice-assistedinject;3.0 in central
+[2025-05-26T07:36:14.548+0000] {spark_submit.py:649} INFO - found it.unimi.dsi#fastutil;6.5.6 in central
+[2025-05-26T07:36:14.551+0000] {spark_submit.py:649} INFO - found org.apache.twill#twill-common;0.6.0-incubating in user-list
+[2025-05-26T07:36:14.555+0000] {spark_submit.py:649} INFO - found org.apache.twill#twill-core;0.6.0-incubating in user-list
+[2025-05-26T07:36:14.558+0000] {spark_submit.py:649} INFO - found org.apache.twill#twill-api;0.6.0-incubating in user-list
+[2025-05-26T07:36:14.562+0000] {spark_submit.py:649} INFO - found org.apache.twill#twill-discovery-api;0.6.0-incubating in central
+[2025-05-26T07:36:14.566+0000] {spark_submit.py:649} INFO - found org.apache.twill#twill-zookeeper;0.6.0-incubating in user-list
+[2025-05-26T07:36:14.571+0000] {spark_submit.py:649} INFO - found org.apache.twill#twill-discovery-core;0.6.0-incubating in central
+[2025-05-26T07:36:14.575+0000] {spark_submit.py:649} INFO - found co.cask.tephra#tephra-hbase-compat-1.0;0.6.0 in central
+[2025-05-26T07:36:14.580+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-exec;3.1.3 in user-list
+[2025-05-26T07:36:14.585+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-llap-tez;3.1.3 in central
+[2025-05-26T07:36:14.590+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-llap-client;3.1.3 in central
+[2025-05-26T07:36:14.594+0000] {spark_submit.py:649} INFO - found org.apache.hive#hive-llap-common;3.1.3 in central
+[2025-05-26T07:36:14.608+0000] {spark_submit.py:649} INFO - found org.antlr#ST4;4.0.4 in central
+[2025-05-26T07:36:14.614+0000] {spark_submit.py:649} INFO - found org.apache.ivy#ivy;2.4.0 in central
+[2025-05-26T07:36:14.617+0000] {spark_submit.py:649} INFO - found org.codehaus.groovy#groovy-all;2.4.11 in central
+[2025-05-26T07:36:14.629+0000] {spark_submit.py:649} INFO - found org.apache.calcite#calcite-core;1.16.0 in central
+[2025-05-26T07:36:14.633+0000] {spark_submit.py:649} INFO - found org.apache.calcite#calcite-linq4j;1.16.0 in user-list
+[2025-05-26T07:36:14.639+0000] {spark_submit.py:649} INFO - found com.esri.geometry#esri-geometry-api;2.0.0 in central
+[2025-05-26T07:36:14.641+0000] {spark_submit.py:649} INFO - found com.google.code.findbugs#jsr305;3.0.1 in central
+[2025-05-26T07:36:14.644+0000] {spark_submit.py:649} INFO - found com.yahoo.datasketches#sketches-core;0.9.0 in central
+[2025-05-26T07:36:14.647+0000] {spark_submit.py:649} INFO - found com.yahoo.datasketches#memory;0.9.0 in central
+[2025-05-26T07:36:14.650+0000] {spark_submit.py:649} INFO - found org.codehaus.janino#janino;2.7.6 in central
+[2025-05-26T07:36:14.652+0000] {spark_submit.py:649} INFO - found org.codehaus.janino#commons-compiler;2.7.6 in central
+[2025-05-26T07:36:14.656+0000] {spark_submit.py:649} INFO - found org.apache.calcite.avatica#avatica;1.11.0 in central
+[2025-05-26T07:36:14.660+0000] {spark_submit.py:649} INFO - found stax#stax-api;1.0.1 in central
+[2025-05-26T07:36:14.665+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-client-api;3.3.4 in central
+[2025-05-26T07:36:14.667+0000] {spark_submit.py:649} INFO - found org.xerial.snappy#snappy-java;1.1.8.2 in central
+[2025-05-26T07:36:14.671+0000] {spark_submit.py:649} INFO - found org.apache.hadoop#hadoop-client-runtime;3.3.4 in central
+[2025-05-26T07:36:14.672+0000] {spark_submit.py:649} INFO - found org.slf4j#slf4j-api;1.7.36 in central
+[2025-05-26T07:36:14.726+0000] {spark_submit.py:649} INFO - :: resolution report :: resolve 1634ms :: artifacts dl 38ms
+[2025-05-26T07:36:14.727+0000] {spark_submit.py:649} INFO - :: modules in use:
+[2025-05-26T07:36:14.727+0000] {spark_submit.py:649} INFO - aopalliance#aopalliance;1.0 from user-list in [default]
+[2025-05-26T07:36:14.727+0000] {spark_submit.py:649} INFO - co.cask.tephra#tephra-api;0.6.0 from central in [default]
+[2025-05-26T07:36:14.728+0000] {spark_submit.py:649} INFO - co.cask.tephra#tephra-core;0.6.0 from central in [default]
+[2025-05-26T07:36:14.728+0000] {spark_submit.py:649} INFO - co.cask.tephra#tephra-hbase-compat-1.0;0.6.0 from central in [default]
+[2025-05-26T07:36:14.729+0000] {spark_submit.py:649} INFO - com.carrotsearch#hppc;0.7.2 from user-list in [default]
+[2025-05-26T07:36:14.729+0000] {spark_submit.py:649} INFO - com.cedarsoftware#java-util;1.9.0 from central in [default]
+[2025-05-26T07:36:14.729+0000] {spark_submit.py:649} INFO - com.cedarsoftware#json-io;2.5.1 from central in [default]
+[2025-05-26T07:36:14.729+0000] {spark_submit.py:649} INFO - com.esri.geometry#esri-geometry-api;2.0.0 from central in [default]
+[2025-05-26T07:36:14.730+0000] {spark_submit.py:649} INFO - com.fasterxml.jackson.core#jackson-annotations;2.12.0 from user-list in [default]
+[2025-05-26T07:36:14.730+0000] {spark_submit.py:649} INFO - com.fasterxml.jackson.core#jackson-core;2.12.0 from central in [default]
+[2025-05-26T07:36:14.730+0000] {spark_submit.py:649} INFO - com.fasterxml.jackson.core#jackson-databind;2.12.0 from user-list in [default]
+[2025-05-26T07:36:14.730+0000] {spark_submit.py:649} INFO - com.fasterxml.jackson.jaxrs#jackson-jaxrs-base;2.12.0 from user-list in [default]
+[2025-05-26T07:36:14.730+0000] {spark_submit.py:649} INFO - com.fasterxml.jackson.jaxrs#jackson-jaxrs-json-provider;2.12.0 from central in [default]
+[2025-05-26T07:36:14.731+0000] {spark_submit.py:649} INFO - com.fasterxml.jackson.module#jackson-module-jaxb-annotations;2.12.0 from central in [default]
+[2025-05-26T07:36:14.731+0000] {spark_submit.py:649} INFO - com.fasterxml.woodstox#woodstox-core;5.0.3 from central in [default]
+[2025-05-26T07:36:14.731+0000] {spark_submit.py:649} INFO - com.github.joshelser#dropwizard-metrics-hadoop-metrics2-reporter;0.1.2 from central in [default]
+[2025-05-26T07:36:14.731+0000] {spark_submit.py:649} INFO - com.github.stephenc.jcip#jcip-annotations;1.0-1 from user-list in [default]
+[2025-05-26T07:36:14.732+0000] {spark_submit.py:649} INFO - com.google.code.findbugs#jsr305;3.0.1 from central in [default]
+[2025-05-26T07:36:14.732+0000] {spark_submit.py:649} INFO - com.google.code.gson#gson;2.2.4 from central in [default]
+[2025-05-26T07:36:14.732+0000] {spark_submit.py:649} INFO - com.google.guava#guava;19.0 from central in [default]
+[2025-05-26T07:36:14.732+0000] {spark_submit.py:649} INFO - com.google.inject#guice;4.0 from central in [default]
+[2025-05-26T07:36:14.733+0000] {spark_submit.py:649} INFO - com.google.inject.extensions#guice-assistedinject;3.0 from central in [default]
+[2025-05-26T07:36:14.733+0000] {spark_submit.py:649} INFO - com.google.inject.extensions#guice-servlet;4.0 from central in [default]
+[2025-05-26T07:36:14.733+0000] {spark_submit.py:649} INFO - com.google.protobuf#protobuf-java;2.5.0 from central in [default]
+[2025-05-26T07:36:14.733+0000] {spark_submit.py:649} INFO - com.google.re2j#re2j;1.1 from central in [default]
+[2025-05-26T07:36:14.734+0000] {spark_submit.py:649} INFO - com.jcraft#jsch;0.1.54 from user-list in [default]
+[2025-05-26T07:36:14.734+0000] {spark_submit.py:649} INFO - com.jolbox#bonecp;0.8.0.RELEASE from central in [default]
+[2025-05-26T07:36:14.734+0000] {spark_submit.py:649} INFO - com.microsoft.sqlserver#mssql-jdbc;6.2.1.jre7 from central in [default]
+[2025-05-26T07:36:14.734+0000] {spark_submit.py:649} INFO - com.nimbusds#nimbus-jose-jwt;4.41.1 from central in [default]
+[2025-05-26T07:36:14.735+0000] {spark_submit.py:649} INFO - com.sun.jersey#jersey-client;1.19 from central in [default]
+[2025-05-26T07:36:14.735+0000] {spark_submit.py:649} INFO - com.sun.jersey#jersey-core;1.19 from user-list in [default]
+[2025-05-26T07:36:14.735+0000] {spark_submit.py:649} INFO - com.sun.jersey#jersey-json;1.19 from user-list in [default]
+[2025-05-26T07:36:14.735+0000] {spark_submit.py:649} INFO - com.sun.jersey#jersey-server;1.19 from central in [default]
+[2025-05-26T07:36:14.735+0000] {spark_submit.py:649} INFO - com.sun.jersey#jersey-servlet;1.19 from central in [default]
+[2025-05-26T07:36:14.736+0000] {spark_submit.py:649} INFO - com.sun.jersey.contribs#jersey-guice;1.19 from user-list in [default]
+[2025-05-26T07:36:14.736+0000] {spark_submit.py:649} INFO - com.sun.xml.bind#jaxb-impl;2.2.3-1 from central in [default]
+[2025-05-26T07:36:14.736+0000] {spark_submit.py:649} INFO - com.tdunning#json;1.8 from user-list in [default]
+[2025-05-26T07:36:14.736+0000] {spark_submit.py:649} INFO - com.thoughtworks.paranamer#paranamer;2.7 from central in [default]
+[2025-05-26T07:36:14.737+0000] {spark_submit.py:649} INFO - com.vlkan#flatbuffers;1.2.0-3f79e055 from central in [default]
+[2025-05-26T07:36:14.737+0000] {spark_submit.py:649} INFO - com.yahoo.datasketches#memory;0.9.0 from central in [default]
+[2025-05-26T07:36:14.737+0000] {spark_submit.py:649} INFO - com.yahoo.datasketches#sketches-core;0.9.0 from central in [default]
+[2025-05-26T07:36:14.737+0000] {spark_submit.py:649} INFO - com.zaxxer#HikariCP;2.6.1 from central in [default]
+[2025-05-26T07:36:14.738+0000] {spark_submit.py:649} INFO - com.zaxxer#HikariCP-java7;2.4.12 from user-list in [default]
+[2025-05-26T07:36:14.738+0000] {spark_submit.py:649} INFO - commons-beanutils#commons-beanutils;1.9.3 from central in [default]
+[2025-05-26T07:36:14.738+0000] {spark_submit.py:649} INFO - commons-cli#commons-cli;1.2 from user-list in [default]
+[2025-05-26T07:36:14.738+0000] {spark_submit.py:649} INFO - commons-codec#commons-codec;1.15 from central in [default]
+[2025-05-26T07:36:14.739+0000] {spark_submit.py:649} INFO - commons-collections#commons-collections;3.2.2 from user-list in [default]
+[2025-05-26T07:36:14.739+0000] {spark_submit.py:649} INFO - commons-daemon#commons-daemon;1.0.13 from user-list in [default]
+[2025-05-26T07:36:14.739+0000] {spark_submit.py:649} INFO - commons-dbcp#commons-dbcp;1.4 from central in [default]
+[2025-05-26T07:36:14.739+0000] {spark_submit.py:649} INFO - commons-io#commons-io;2.6 from user-list in [default]
+[2025-05-26T07:36:14.740+0000] {spark_submit.py:649} INFO - commons-lang#commons-lang;2.6 from central in [default]
+[2025-05-26T07:36:14.740+0000] {spark_submit.py:649} INFO - commons-logging#commons-logging;1.2 from user-list in [default]
+[2025-05-26T07:36:14.740+0000] {spark_submit.py:649} INFO - commons-net#commons-net;3.6 from central in [default]
+[2025-05-26T07:36:14.740+0000] {spark_submit.py:649} INFO - commons-pool#commons-pool;1.5.4 from central in [default]
+[2025-05-26T07:36:14.741+0000] {spark_submit.py:649} INFO - de.ruedigermoeller#fst;2.50 from central in [default]
+[2025-05-26T07:36:14.741+0000] {spark_submit.py:649} INFO - dnsjava#dnsjava;2.1.7 from central in [default]
+[2025-05-26T07:36:14.741+0000] {spark_submit.py:649} INFO - io.airlift#aircompressor;0.10 from user-list in [default]
+[2025-05-26T07:36:14.741+0000] {spark_submit.py:649} INFO - io.dropwizard.metrics#metrics-core;3.2.1 from central in [default]
+[2025-05-26T07:36:14.741+0000] {spark_submit.py:649} INFO - io.dropwizard.metrics#metrics-json;3.1.0 from central in [default]
+[2025-05-26T07:36:14.742+0000] {spark_submit.py:649} INFO - io.dropwizard.metrics#metrics-jvm;3.1.0 from central in [default]
+[2025-05-26T07:36:14.742+0000] {spark_submit.py:649} INFO - io.netty#netty;3.7.0.Final from user-list in [default]
+[2025-05-26T07:36:14.742+0000] {spark_submit.py:649} INFO - io.netty#netty-buffer;4.1.17.Final from central in [default]
+[2025-05-26T07:36:14.742+0000] {spark_submit.py:649} INFO - io.netty#netty-common;4.1.17.Final from central in [default]
+[2025-05-26T07:36:14.743+0000] {spark_submit.py:649} INFO - it.unimi.dsi#fastutil;6.5.6 from central in [default]
+[2025-05-26T07:36:14.743+0000] {spark_submit.py:649} INFO - jakarta.activation#jakarta.activation-api;1.2.1 from user-list in [default]
+[2025-05-26T07:36:14.743+0000] {spark_submit.py:649} INFO - jakarta.xml.bind#jakarta.xml.bind-api;2.3.2 from central in [default]
+[2025-05-26T07:36:14.743+0000] {spark_submit.py:649} INFO - javax.inject#javax.inject;1 from user-list in [default]
+[2025-05-26T07:36:14.744+0000] {spark_submit.py:649} INFO - javax.jdo#jdo-api;3.0.1 from central in [default]
+[2025-05-26T07:36:14.744+0000] {spark_submit.py:649} INFO - javax.servlet#javax.servlet-api;3.1.0 from central in [default]
+[2025-05-26T07:36:14.744+0000] {spark_submit.py:649} INFO - javax.servlet.jsp#jsp-api;2.1 from central in [default]
+[2025-05-26T07:36:14.745+0000] {spark_submit.py:649} INFO - javax.transaction#jta;1.1 from user-list in [default]
+[2025-05-26T07:36:14.745+0000] {spark_submit.py:649} INFO - javax.transaction#transaction-api;1.1 from central in [default]
+[2025-05-26T07:36:14.745+0000] {spark_submit.py:649} INFO - javax.ws.rs#jsr311-api;1.1.1 from user-list in [default]
+[2025-05-26T07:36:14.746+0000] {spark_submit.py:649} INFO - javax.xml.bind#jaxb-api;2.2.11 from central in [default]
+[2025-05-26T07:36:14.746+0000] {spark_submit.py:649} INFO - javolution#javolution;5.5.1 from central in [default]
+[2025-05-26T07:36:14.746+0000] {spark_submit.py:649} INFO - jline#jline;2.12 from central in [default]
+[2025-05-26T07:36:14.747+0000] {spark_submit.py:649} INFO - joda-time#joda-time;2.9.9 from central in [default]
+[2025-05-26T07:36:14.747+0000] {spark_submit.py:649} INFO - junit#junit;4.11 from central in [default]
+[2025-05-26T07:36:14.747+0000] {spark_submit.py:649} INFO - log4j#log4j;1.2.17 from central in [default]
+[2025-05-26T07:36:14.747+0000] {spark_submit.py:649} INFO - net.minidev#accessors-smart;1.2 from central in [default]
+[2025-05-26T07:36:14.748+0000] {spark_submit.py:649} INFO - net.minidev#json-smart;2.3 from central in [default]
+[2025-05-26T07:36:14.748+0000] {spark_submit.py:649} INFO - net.sf.jpam#jpam;1.1 from user-list in [default]
+[2025-05-26T07:36:14.748+0000] {spark_submit.py:649} INFO - net.sf.opencsv#opencsv;2.3 from central in [default]
+[2025-05-26T07:36:14.748+0000] {spark_submit.py:649} INFO - org.antlr#ST4;4.0.4 from central in [default]
+[2025-05-26T07:36:14.749+0000] {spark_submit.py:649} INFO - org.antlr#antlr-runtime;3.5.2 from central in [default]
+[2025-05-26T07:36:14.749+0000] {spark_submit.py:649} INFO - org.apache.ant#ant;1.9.1 from central in [default]
+[2025-05-26T07:36:14.749+0000] {spark_submit.py:649} INFO - org.apache.ant#ant-launcher;1.9.1 from central in [default]
+[2025-05-26T07:36:14.750+0000] {spark_submit.py:649} INFO - org.apache.arrow#arrow-format;0.8.0 from central in [default]
+[2025-05-26T07:36:14.750+0000] {spark_submit.py:649} INFO - org.apache.arrow#arrow-memory;0.8.0 from user-list in [default]
+[2025-05-26T07:36:14.750+0000] {spark_submit.py:649} INFO - org.apache.arrow#arrow-vector;0.8.0 from central in [default]
+[2025-05-26T07:36:14.750+0000] {spark_submit.py:649} INFO - org.apache.avro#avro;1.8.2 from central in [default]
+[2025-05-26T07:36:14.751+0000] {spark_submit.py:649} INFO - org.apache.calcite#calcite-core;1.16.0 from central in [default]
+[2025-05-26T07:36:14.751+0000] {spark_submit.py:649} INFO - org.apache.calcite#calcite-linq4j;1.16.0 from user-list in [default]
+[2025-05-26T07:36:14.751+0000] {spark_submit.py:649} INFO - org.apache.calcite.avatica#avatica;1.11.0 from central in [default]
+[2025-05-26T07:36:14.751+0000] {spark_submit.py:649} INFO - org.apache.commons#commons-compress;1.19 from central in [default]
+[2025-05-26T07:36:14.751+0000] {spark_submit.py:649} INFO - org.apache.commons#commons-configuration2;2.1.1 from central in [default]
+[2025-05-26T07:36:14.752+0000] {spark_submit.py:649} INFO - org.apache.commons#commons-crypto;1.0.0 from central in [default]
+[2025-05-26T07:36:14.752+0000] {spark_submit.py:649} INFO - org.apache.commons#commons-lang3;3.9 from user-list in [default]
+[2025-05-26T07:36:14.752+0000] {spark_submit.py:649} INFO - org.apache.commons#commons-math3;3.1.1 from central in [default]
+[2025-05-26T07:36:14.752+0000] {spark_submit.py:649} INFO - org.apache.derby#derby;10.14.1.0 from user-list in [default]
+[2025-05-26T07:36:14.753+0000] {spark_submit.py:649} INFO - org.apache.geronimo.specs#geronimo-jcache_1.0_spec;1.0-alpha-1 from central in [default]
+[2025-05-26T07:36:14.753+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-annotations;3.1.0 from central in [default]
+[2025-05-26T07:36:14.753+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-auth;3.1.0 from central in [default]
+[2025-05-26T07:36:14.753+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-client-api;3.3.4 from central in [default]
+[2025-05-26T07:36:14.754+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-client-runtime;3.3.4 from central in [default]
+[2025-05-26T07:36:14.754+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-common;3.1.0 from central in [default]
+[2025-05-26T07:36:14.754+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-yarn-api;3.1.0 from user-list in [default]
+[2025-05-26T07:36:14.754+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-yarn-common;3.1.0 from central in [default]
+[2025-05-26T07:36:14.754+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-yarn-registry;3.1.0 from central in [default]
+[2025-05-26T07:36:14.755+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-yarn-server-applicationhistoryservice;3.1.0 from central in [default]
+[2025-05-26T07:36:14.755+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-yarn-server-common;3.1.0 from user-list in [default]
+[2025-05-26T07:36:14.755+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-yarn-server-resourcemanager;3.1.0 from central in [default]
+[2025-05-26T07:36:14.755+0000] {spark_submit.py:649} INFO - org.apache.hadoop#hadoop-yarn-server-web-proxy;3.1.0 from central in [default]
+[2025-05-26T07:36:14.756+0000] {spark_submit.py:649} INFO - org.apache.hbase#hbase-client;2.0.0-alpha4 from central in [default]
+[2025-05-26T07:36:14.756+0000] {spark_submit.py:649} INFO - org.apache.hbase#hbase-protocol;2.0.0-alpha4 from user-list in [default]
+[2025-05-26T07:36:14.756+0000] {spark_submit.py:649} INFO - org.apache.hbase#hbase-protocol-shaded;2.0.0-alpha4 from central in [default]
+[2025-05-26T07:36:14.756+0000] {spark_submit.py:649} INFO - org.apache.hbase.thirdparty#hbase-shaded-miscellaneous;1.0.1 from central in [default]
+[2025-05-26T07:36:14.757+0000] {spark_submit.py:649} INFO - org.apache.hbase.thirdparty#hbase-shaded-netty;1.0.1 from central in [default]
+[2025-05-26T07:36:14.757+0000] {spark_submit.py:649} INFO - org.apache.hbase.thirdparty#hbase-shaded-protobuf;1.0.1 from central in [default]
+[2025-05-26T07:36:14.757+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-classification;3.1.3 from central in [default]
+[2025-05-26T07:36:14.757+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-common;3.1.3 from central in [default]
+[2025-05-26T07:36:14.758+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-exec;3.1.3 from user-list in [default]
+[2025-05-26T07:36:14.758+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-llap-client;3.1.3 from central in [default]
+[2025-05-26T07:36:14.758+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-llap-common;3.1.3 from central in [default]
+[2025-05-26T07:36:14.758+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-llap-tez;3.1.3 from central in [default]
+[2025-05-26T07:36:14.758+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-metastore;3.1.3 from user-list in [default]
+[2025-05-26T07:36:14.759+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-serde;3.1.3 from central in [default]
+[2025-05-26T07:36:14.759+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-service-rpc;3.1.3 from central in [default]
+[2025-05-26T07:36:14.759+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-shims;3.1.3 from central in [default]
+[2025-05-26T07:36:14.759+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-standalone-metastore;3.1.3 from central in [default]
+[2025-05-26T07:36:14.760+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-storage-api;2.7.0 from central in [default]
+[2025-05-26T07:36:14.760+0000] {spark_submit.py:649} INFO - org.apache.hive#hive-upgrade-acid;3.1.3 from central in [default]
+[2025-05-26T07:36:14.760+0000] {spark_submit.py:649} INFO - org.apache.hive.shims#hive-shims-0.23;3.1.3 from central in [default]
+[2025-05-26T07:36:14.760+0000] {spark_submit.py:649} INFO - org.apache.hive.shims#hive-shims-common;3.1.3 from central in [default]
+[2025-05-26T07:36:14.761+0000] {spark_submit.py:649} INFO - org.apache.hive.shims#hive-shims-scheduler;3.1.3 from central in [default]
+[2025-05-26T07:36:14.761+0000] {spark_submit.py:649} INFO - org.apache.htrace#htrace-core;3.2.0-incubating from central in [default]
+[2025-05-26T07:36:14.761+0000] {spark_submit.py:649} INFO - org.apache.htrace#htrace-core4;4.1.0-incubating from user-list in [default]
+[2025-05-26T07:36:14.761+0000] {spark_submit.py:649} INFO - org.apache.httpcomponents#httpclient;4.5.13 from central in [default]
+[2025-05-26T07:36:14.762+0000] {spark_submit.py:649} INFO - org.apache.httpcomponents#httpcore;4.4.13 from central in [default]
+[2025-05-26T07:36:14.762+0000] {spark_submit.py:649} INFO - org.apache.ivy#ivy;2.4.0 from central in [default]
+[2025-05-26T07:36:14.762+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-admin;1.0.1 from user-list in [default]
+[2025-05-26T07:36:14.762+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-client;1.0.1 from central in [default]
+[2025-05-26T07:36:14.763+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-common;1.0.1 from central in [default]
+[2025-05-26T07:36:14.763+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-core;1.0.1 from user-list in [default]
+[2025-05-26T07:36:14.763+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-crypto;1.0.1 from central in [default]
+[2025-05-26T07:36:14.763+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-identity;1.0.1 from user-list in [default]
+[2025-05-26T07:36:14.764+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-server;1.0.1 from central in [default]
+[2025-05-26T07:36:14.764+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-simplekdc;1.0.1 from central in [default]
+[2025-05-26T07:36:14.764+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerb-util;1.0.1 from user-list in [default]
+[2025-05-26T07:36:14.764+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerby-asn1;1.0.1 from central in [default]
+[2025-05-26T07:36:14.764+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerby-config;1.0.1 from central in [default]
+[2025-05-26T07:36:14.765+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerby-pkix;1.0.1 from central in [default]
+[2025-05-26T07:36:14.765+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerby-util;1.0.1 from central in [default]
+[2025-05-26T07:36:14.765+0000] {spark_submit.py:649} INFO - org.apache.kerby#kerby-xdr;1.0.1 from central in [default]
+[2025-05-26T07:36:14.765+0000] {spark_submit.py:649} INFO - org.apache.kerby#token-provider;1.0.1 from user-list in [default]
+[2025-05-26T07:36:14.766+0000] {spark_submit.py:649} INFO - org.apache.logging.log4j#log4j-1.2-api;2.17.1 from central in [default]
+[2025-05-26T07:36:14.766+0000] {spark_submit.py:649} INFO - org.apache.logging.log4j#log4j-api;2.10.0 from user-list in [default]
+[2025-05-26T07:36:14.766+0000] {spark_submit.py:649} INFO - org.apache.logging.log4j#log4j-core;2.17.1 from central in [default]
+[2025-05-26T07:36:14.766+0000] {spark_submit.py:649} INFO - org.apache.logging.log4j#log4j-slf4j-impl;2.17.1 from central in [default]
+[2025-05-26T07:36:14.767+0000] {spark_submit.py:649} INFO - org.apache.logging.log4j#log4j-web;2.17.1 from central in [default]
+[2025-05-26T07:36:14.767+0000] {spark_submit.py:649} INFO - org.apache.orc#orc-core;1.5.8 from user-list in [default]
+[2025-05-26T07:36:14.767+0000] {spark_submit.py:649} INFO - org.apache.orc#orc-shims;1.5.8 from central in [default]
+[2025-05-26T07:36:14.767+0000] {spark_submit.py:649} INFO - org.apache.parquet#parquet-hadoop-bundle;1.10.0 from central in [default]
+[2025-05-26T07:36:14.767+0000] {spark_submit.py:649} INFO - org.apache.thrift#libfb303;0.9.3 from central in [default]
+[2025-05-26T07:36:14.768+0000] {spark_submit.py:649} INFO - org.apache.thrift#libthrift;0.9.3 from central in [default]
+[2025-05-26T07:36:14.768+0000] {spark_submit.py:649} INFO - org.apache.twill#twill-api;0.6.0-incubating from user-list in [default]
+[2025-05-26T07:36:14.768+0000] {spark_submit.py:649} INFO - org.apache.twill#twill-common;0.6.0-incubating from user-list in [default]
+[2025-05-26T07:36:14.768+0000] {spark_submit.py:649} INFO - org.apache.twill#twill-core;0.6.0-incubating from user-list in [default]
+[2025-05-26T07:36:14.769+0000] {spark_submit.py:649} INFO - org.apache.twill#twill-discovery-api;0.6.0-incubating from central in [default]
+[2025-05-26T07:36:14.769+0000] {spark_submit.py:649} INFO - org.apache.twill#twill-discovery-core;0.6.0-incubating from central in [default]
+[2025-05-26T07:36:14.769+0000] {spark_submit.py:649} INFO - org.apache.twill#twill-zookeeper;0.6.0-incubating from user-list in [default]
+[2025-05-26T07:36:14.769+0000] {spark_submit.py:649} INFO - org.apache.yetus#audience-annotations;0.5.0 from central in [default]
+[2025-05-26T07:36:14.770+0000] {spark_submit.py:649} INFO - org.apache.zookeeper#zookeeper;3.4.6 from user-list in [default]
+[2025-05-26T07:36:14.770+0000] {spark_submit.py:649} INFO - org.codehaus.groovy#groovy-all;2.4.11 from central in [default]
+[2025-05-26T07:36:14.770+0000] {spark_submit.py:649} INFO - org.codehaus.jackson#jackson-core-asl;1.9.13 from central in [default]
+[2025-05-26T07:36:14.770+0000] {spark_submit.py:649} INFO - org.codehaus.jackson#jackson-jaxrs;1.9.13 from central in [default]
+[2025-05-26T07:36:14.771+0000] {spark_submit.py:649} INFO - org.codehaus.jackson#jackson-mapper-asl;1.9.13 from user-list in [default]
+[2025-05-26T07:36:14.771+0000] {spark_submit.py:649} INFO - org.codehaus.jackson#jackson-xc;1.9.13 from user-list in [default]
+[2025-05-26T07:36:14.771+0000] {spark_submit.py:649} INFO - org.codehaus.janino#commons-compiler;2.7.6 from central in [default]
+[2025-05-26T07:36:14.771+0000] {spark_submit.py:649} INFO - org.codehaus.janino#janino;2.7.6 from central in [default]
+[2025-05-26T07:36:14.772+0000] {spark_submit.py:649} INFO - org.codehaus.jettison#jettison;1.1 from central in [default]
+[2025-05-26T07:36:14.772+0000] {spark_submit.py:649} INFO - org.codehaus.woodstox#stax2-api;3.1.4 from central in [default]
+[2025-05-26T07:36:14.772+0000] {spark_submit.py:649} INFO - org.datanucleus#datanucleus-api-jdo;4.2.4 from user-list in [default]
+[2025-05-26T07:36:14.772+0000] {spark_submit.py:649} INFO - org.datanucleus#datanucleus-core;4.1.17 from user-list in [default]
+[2025-05-26T07:36:14.773+0000] {spark_submit.py:649} INFO - org.datanucleus#datanucleus-rdbms;4.1.19 from central in [default]
+[2025-05-26T07:36:14.773+0000] {spark_submit.py:649} INFO - org.datanucleus#javax.jdo;3.2.0-m3 from central in [default]
+[2025-05-26T07:36:14.773+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-client;9.3.20.v20170531 from central in [default]
+[2025-05-26T07:36:14.773+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-http;9.3.20.v20170531 from central in [default]
+[2025-05-26T07:36:14.773+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-io;9.3.20.v20170531 from user-list in [default]
+[2025-05-26T07:36:14.774+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-rewrite;9.3.20.v20170531 from central in [default]
+[2025-05-26T07:36:14.774+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-security;9.3.20.v20170531 from central in [default]
+[2025-05-26T07:36:14.774+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-server;9.3.20.v20170531 from central in [default]
+[2025-05-26T07:36:14.775+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-servlet;9.3.20.v20170531 from user-list in [default]
+[2025-05-26T07:36:14.775+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-util;9.3.19.v20170502 from user-list in [default]
+[2025-05-26T07:36:14.775+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-util-ajax;9.3.19.v20170502 from central in [default]
+[2025-05-26T07:36:14.775+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-webapp;9.3.20.v20170531 from central in [default]
+[2025-05-26T07:36:14.776+0000] {spark_submit.py:649} INFO - org.eclipse.jetty#jetty-xml;9.3.20.v20170531 from central in [default]
+[2025-05-26T07:36:14.776+0000] {spark_submit.py:649} INFO - org.ehcache#ehcache;3.3.1 from user-list in [default]
+[2025-05-26T07:36:14.776+0000] {spark_submit.py:649} INFO - org.fusesource.leveldbjni#leveldbjni-all;1.8 from central in [default]
+[2025-05-26T07:36:14.776+0000] {spark_submit.py:649} INFO - org.hamcrest#hamcrest-core;1.3 from central in [default]
+[2025-05-26T07:36:14.777+0000] {spark_submit.py:649} INFO - org.jruby.jcodings#jcodings;1.0.18 from central in [default]
+[2025-05-26T07:36:14.777+0000] {spark_submit.py:649} INFO - org.jruby.joni#joni;2.1.11 from central in [default]
+[2025-05-26T07:36:14.777+0000] {spark_submit.py:649} INFO - org.ow2.asm#asm;5.0.4 from central in [default]
+[2025-05-26T07:36:14.777+0000] {spark_submit.py:649} INFO - org.slf4j#slf4j-api;1.7.36 from central in [default]
+[2025-05-26T07:36:14.778+0000] {spark_submit.py:649} INFO - org.slf4j#slf4j-log4j12;1.6.1 from user-list in [default]
+[2025-05-26T07:36:14.778+0000] {spark_submit.py:649} INFO - org.tukaani#xz;1.5 from central in [default]
+[2025-05-26T07:36:14.778+0000] {spark_submit.py:649} INFO - org.xerial.snappy#snappy-java;1.1.8.2 from central in [default]
+[2025-05-26T07:36:14.778+0000] {spark_submit.py:649} INFO - sqlline#sqlline;1.3.0 from user-list in [default]
+[2025-05-26T07:36:14.779+0000] {spark_submit.py:649} INFO - stax#stax-api;1.0.1 from central in [default]
+[2025-05-26T07:36:14.779+0000] {spark_submit.py:649} INFO - :: evicted modules:
+[2025-05-26T07:36:14.779+0000] {spark_submit.py:649} INFO - org.slf4j#slf4j-api;1.7.10 by [org.slf4j#slf4j-api;1.7.36] in [default]
+[2025-05-26T07:36:14.779+0000] {spark_submit.py:649} INFO - log4j#log4j;1.2.16 by [log4j#log4j;1.2.17] in [default]
+[2025-05-26T07:36:14.779+0000] {spark_submit.py:649} INFO - commons-logging#commons-logging;1.1.3 by [commons-logging#commons-logging;1.2] in [default]
+[2025-05-26T07:36:14.780+0000] {spark_submit.py:649} INFO - org.apache.commons#commons-lang3;3.4 by [org.apache.commons#commons-lang3;3.9] in [default]
+[2025-05-26T07:36:14.780+0000] {spark_submit.py:649} INFO - org.xerial.snappy#snappy-java;1.1.4 by [org.xerial.snappy#snappy-java;1.1.8.2] in [default]
+[2025-05-26T07:36:14.780+0000] {spark_submit.py:649} INFO - com.google.code.findbugs#jsr305;3.0.0 by [com.google.code.findbugs#jsr305;3.0.1] in [default]
+[2025-05-26T07:36:14.780+0000] {spark_submit.py:649} INFO - commons-logging#commons-logging;1.0.4 by [commons-logging#commons-logging;1.2] in [default]
+[2025-05-26T07:36:14.781+0000] {spark_submit.py:649} INFO - io.dropwizard.metrics#metrics-core;3.1.0 by [io.dropwizard.metrics#metrics-core;3.2.1] in [default]
+[2025-05-26T07:36:14.781+0000] {spark_submit.py:649} INFO - io.dropwizard.metrics#metrics-core;3.1.2 by [io.dropwizard.metrics#metrics-core;3.1.0] in [default]
+[2025-05-26T07:36:14.781+0000] {spark_submit.py:649} INFO - com.google.code.findbugs#jsr305;3.0.2 by [com.google.code.findbugs#jsr305;3.0.1] in [default]
+[2025-05-26T07:36:14.781+0000] {spark_submit.py:649} INFO - org.apache.commons#commons-lang3;3.2 by [org.apache.commons#commons-lang3;3.9] in [default]
+[2025-05-26T07:36:14.782+0000] {spark_submit.py:649} INFO - org.apache.commons#commons-lang3;3.6 by [org.apache.commons#commons-lang3;3.9] in [default]
+[2025-05-26T07:36:14.782+0000] {spark_submit.py:649} INFO - com.google.inject#guice;3.0 by [com.google.inject#guice;4.0] in [default]
+[2025-05-26T07:36:14.782+0000] {spark_submit.py:649} INFO - com.google.code.findbugs#jsr305;2.0.1 by [com.google.code.findbugs#jsr305;3.0.0] in [default]
+[2025-05-26T07:36:14.782+0000] {spark_submit.py:649} INFO - com.google.guava#guava;14.0.1 by [com.google.guava#guava;19.0] in [default]
+[2025-05-26T07:36:14.782+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-26T07:36:14.783+0000] {spark_submit.py:649} INFO - |                  |            modules            ||   artifacts   |
+[2025-05-26T07:36:14.783+0000] {spark_submit.py:649} INFO - |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+[2025-05-26T07:36:14.783+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-26T07:36:14.783+0000] {spark_submit.py:649} INFO - |      default     |  224  |   0   |   0   |   15  ||  209  |   0   |
+[2025-05-26T07:36:14.784+0000] {spark_submit.py:649} INFO - ---------------------------------------------------------------------
+[2025-05-26T07:36:14.784+0000] {spark_submit.py:649} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-12d695fa-7712-4fb7-b86e-4f7b4bec487b
+[2025-05-26T07:36:14.784+0000] {spark_submit.py:649} INFO - confs: [default]
+[2025-05-26T07:36:14.784+0000] {spark_submit.py:649} INFO - 0 artifacts copied, 209 already retrieved (0kB/11ms)
+[2025-05-26T07:36:14.990+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:14 INFO IsolatedClientLoader: Downloaded metastore jars to /tmp/hive-v3_1-4d9358c9-2d16-48c5-9a2c-9cc329e20ca4
+[2025-05-26T07:36:15.209+0000] {spark_submit.py:649} INFO - Hive Session ID = 6dddd49f-7f84-474a-b643-b92e3d6b5210
+[2025-05-26T07:36:15.231+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:15 INFO HiveClientImpl: Warehouse location for Hive client (version 3.1.3) is file:/opt/airflow/spark-warehouse
+[2025-05-26T07:36:15.415+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:15 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+[2025-05-26T07:36:15.420+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:15 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-05-26T07:36:15.421+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:15 INFO MetricsSystemImpl: s3a-file-system metrics system started
+[2025-05-26T07:36:17.138+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:17 INFO DelegatingLogStore: LogStore LogStoreAdapter(io.delta.storage.S3SingleDriverLogStore) is used for scheme s3a
+[2025-05-26T07:36:17.169+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:17 INFO DeltaLog: Creating initial snapshot without metadata, because the directory is empty
+[2025-05-26T07:36:17.196+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:17 INFO DummySnapshot: [tableId=a4b2a841-f06d-4cac-9227-1e522d516271] Created snapshot DummySnapshot(path=s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log, version=-1, metadata=Metadata(3829f33d-03a1-4a5b-9fe5-a509e347c525,null,null,Format(parquet,Map()),null,List(),Map(),Some(1748244977173)), logSegment=LogSegment(s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log,-1,List(),org.apache.spark.sql.delta.EmptyCheckpointProvider$@576267a8,-1), checksumOpt=None)
+[2025-05-26T07:36:17.241+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:17 INFO DeltaLog: Creating initial snapshot without metadata, because the directory is empty
+[2025-05-26T07:36:17.244+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:17 INFO DummySnapshot: [tableId=3829f33d-03a1-4a5b-9fe5-a509e347c525] Created snapshot DummySnapshot(path=s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log, version=-1, metadata=Metadata(587f3f1d-971b-4ae6-803a-1dad86fb70fa,null,null,Format(parquet,Map()),null,List(),Map(),Some(1748244977242)), logSegment=LogSegment(s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log,-1,List(),org.apache.spark.sql.delta.EmptyCheckpointProvider$@576267a8,-1), checksumOpt=None)
+[2025-05-26T07:36:17.321+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:17 INFO OptimisticTransaction: [tableId=587f3f1d,txnId=47ee5294] Updated metadata from - to Metadata(0fca14a1-0f42-439f-bba5-85ea9b92296f,null,null,Format(parquet,Map()),{"type":"struct","fields":[{"name":"Time_Key","type":"integer","nullable":true,"metadata":{}},{"name":"Time","type":"string","nullable":true,"metadata":{}},{"name":"Hour","type":"integer","nullable":true,"metadata":{}},{"name":"Minute","type":"integer","nullable":true,"metadata":{}},{"name":"Second","type":"integer","nullable":true,"metadata":{}}]},ArrayBuffer(),Map(),Some(1748244977298))
+[2025-05-26T07:36:20.477+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO ParquetUtils: Using default output committer for Parquet: org.apache.parquet.hadoop.ParquetOutputCommitter
+[2025-05-26T07:36:20.603+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO CodeGenerator: Code generated in 85.635749 ms
+[2025-05-26T07:36:20.650+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO SparkContext: Starting job: $anonfun$withThreadLocalCaptured$1 at FutureTask.java:264
+[2025-05-26T07:36:20.657+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO DAGScheduler: Got job 0 ($anonfun$withThreadLocalCaptured$1 at FutureTask.java:264) with 1 output partitions
+[2025-05-26T07:36:20.657+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO DAGScheduler: Final stage: ResultStage 0 ($anonfun$withThreadLocalCaptured$1 at FutureTask.java:264)
+[2025-05-26T07:36:20.657+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO DAGScheduler: Parents of final stage: List()
+[2025-05-26T07:36:20.658+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO DAGScheduler: Missing parents: List()
+[2025-05-26T07:36:20.659+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[2] at $anonfun$withThreadLocalCaptured$1 at FutureTask.java:264), which has no missing parents
+[2025-05-26T07:36:20.685+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 8.2 KiB, free 434.4 MiB)
+[2025-05-26T07:36:20.697+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 4.2 KiB, free 434.4 MiB)
+[2025-05-26T07:36:20.698+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on airflow-scheduler:33179 (size: 4.2 KiB, free: 434.4 MiB)
+[2025-05-26T07:36:20.700+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:1585
+[2025-05-26T07:36:20.709+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (MapPartitionsRDD[2] at $anonfun$withThreadLocalCaptured$1 at FutureTask.java:264) (first 15 tasks are for partitions Vector(0))
+[2025-05-26T07:36:20.710+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:20 INFO TaskSchedulerImpl: Adding task set 0.0 with 1 tasks resource profile 0
+[2025-05-26T07:36:29.669+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:29 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20250526073612-0100/0 on worker-20250526035810-172.18.0.12-40475 (172.18.0.12:40475) with 32 core(s)
+[2025-05-26T07:36:29.670+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:29 INFO StandaloneSchedulerBackend: Granted executor ID app-20250526073612-0100/0 on hostPort 172.18.0.12:40475 with 32 core(s), 1024.0 MiB RAM
+[2025-05-26T07:36:29.671+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:29 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20250526073612-0100/1 on worker-20250526035810-172.18.0.11-41055 (172.18.0.11:41055) with 32 core(s)
+[2025-05-26T07:36:29.671+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:29 INFO StandaloneSchedulerBackend: Granted executor ID app-20250526073612-0100/1 on hostPort 172.18.0.11:41055 with 32 core(s), 1024.0 MiB RAM
+[2025-05-26T07:36:29.703+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:29 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20250526073612-0100/0 is now RUNNING
+[2025-05-26T07:36:29.704+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:29 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20250526073612-0100/1 is now RUNNING
+[2025-05-26T07:36:30.832+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:30 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.18.0.11:41784) with ID 1,  ResourceProfileId 0
+[2025-05-26T07:36:30.869+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:30 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.18.0.12:37854) with ID 0,  ResourceProfileId 0
+[2025-05-26T07:36:30.869+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:30 INFO BlockManagerMasterEndpoint: Registering block manager 172.18.0.11:39101 with 434.4 MiB RAM, BlockManagerId(1, 172.18.0.11, 39101, None)
+[2025-05-26T07:36:30.905+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:30 INFO BlockManagerMasterEndpoint: Registering block manager 172.18.0.12:38701 with 434.4 MiB RAM, BlockManagerId(0, 172.18.0.12, 38701, None)
+[2025-05-26T07:36:32.195+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (172.18.0.11, executor 1, partition 0, PROCESS_LOCAL, 10454 bytes)
+[2025-05-26T07:36:32.322+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 172.18.0.11:39101 (size: 4.2 KiB, free: 434.4 MiB)
+[2025-05-26T07:36:32.640+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 456 ms on 172.18.0.11 (executor 1) (1/1)
+[2025-05-26T07:36:32.641+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool
+[2025-05-26T07:36:32.644+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: ResultStage 0 ($anonfun$withThreadLocalCaptured$1 at FutureTask.java:264) finished in 11.979 s
+[2025-05-26T07:36:32.645+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
+[2025-05-26T07:36:32.646+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO TaskSchedulerImpl: Killing all running tasks in stage 0: Stage finished
+[2025-05-26T07:36:32.648+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: Job 0 finished: $anonfun$withThreadLocalCaptured$1 at FutureTask.java:264, took 11.997288 s
+[2025-05-26T07:36:32.654+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 633.0 B, free 434.4 MiB)
+[2025-05-26T07:36:32.655+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on airflow-scheduler:33179 (size: 633.0 B, free: 434.4 MiB)
+[2025-05-26T07:36:32.655+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO SparkContext: Created broadcast 1 from $anonfun$withThreadLocalCaptured$1 at FutureTask.java:264
+[2025-05-26T07:36:32.728+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO CodeGenerator: Code generated in 32.782985 ms
+[2025-05-26T07:36:32.792+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO SparkContext: Starting job: $anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128
+[2025-05-26T07:36:32.794+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: Got job 1 ($anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128) with 1 output partitions
+[2025-05-26T07:36:32.794+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: Final stage: ResultStage 1 ($anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128)
+[2025-05-26T07:36:32.794+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: Parents of final stage: List()
+[2025-05-26T07:36:32.795+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: Missing parents: List()
+[2025-05-26T07:36:32.795+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: Submitting ResultStage 1 (MapPartitionsRDD[3] at $anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128), which has no missing parents
+[2025-05-26T07:36:32.818+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 345.8 KiB, free 434.0 MiB)
+[2025-05-26T07:36:32.820+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 124.8 KiB, free 433.9 MiB)
+[2025-05-26T07:36:32.822+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on airflow-scheduler:33179 (size: 124.8 KiB, free: 434.3 MiB)
+[2025-05-26T07:36:32.822+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:1585
+[2025-05-26T07:36:32.823+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 1 (MapPartitionsRDD[3] at $anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128) (first 15 tasks are for partitions Vector(0))
+[2025-05-26T07:36:32.824+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO TaskSchedulerImpl: Adding task set 1.0 with 1 tasks resource profile 0
+[2025-05-26T07:36:32.825+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 1) (172.18.0.12, executor 0, partition 0, PROCESS_LOCAL, 10454 bytes)
+[2025-05-26T07:36:32.826+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO BlockManagerInfo: Removed broadcast_0_piece0 on airflow-scheduler:33179 in memory (size: 4.2 KiB, free: 434.3 MiB)
+[2025-05-26T07:36:32.831+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO BlockManagerInfo: Removed broadcast_0_piece0 on 172.18.0.11:39101 in memory (size: 4.2 KiB, free: 434.4 MiB)
+[2025-05-26T07:36:32.949+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:32 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on 172.18.0.12:38701 (size: 124.8 KiB, free: 434.3 MiB)
+[2025-05-26T07:36:33.417+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:33 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 172.18.0.12:38701 (size: 633.0 B, free: 434.3 MiB)
+[2025-05-26T07:36:36.561+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 1) in 3735 ms on 172.18.0.12 (executor 0) (1/1)
+[2025-05-26T07:36:36.561+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool
+[2025-05-26T07:36:36.562+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO DAGScheduler: ResultStage 1 ($anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128) finished in 3.766 s
+[2025-05-26T07:36:36.563+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO DAGScheduler: Job 1 is finished. Cancelling potential speculative or zombie tasks for this job
+[2025-05-26T07:36:36.563+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO TaskSchedulerImpl: Killing all running tasks in stage 1: Stage finished
+[2025-05-26T07:36:36.564+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO DAGScheduler: Job 1 finished: $anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128, took 3.695028 s
+[2025-05-26T07:36:36.566+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO DeltaFileFormatWriter: Start to commit write Job 618aadb3-569d-4fe7-b662-8f79eb88cf4e.
+[2025-05-26T07:36:36.567+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO DeltaFileFormatWriter: Write Job 618aadb3-569d-4fe7-b662-8f79eb88cf4e committed. Elapsed time: 0 ms.
+[2025-05-26T07:36:36.569+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO DeltaFileFormatWriter: Finished processing stats for write job 618aadb3-569d-4fe7-b662-8f79eb88cf4e.
+[2025-05-26T07:36:36.596+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO BlockManagerInfo: Removed broadcast_2_piece0 on airflow-scheduler:33179 in memory (size: 124.8 KiB, free: 434.4 MiB)
+[2025-05-26T07:36:36.600+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:36 INFO BlockManagerInfo: Removed broadcast_2_piece0 on 172.18.0.12:38701 in memory (size: 124.8 KiB, free: 434.4 MiB)
+[2025-05-26T07:36:37.394+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO CodeGenerator: Code generated in 157.408628 ms
+[2025-05-26T07:36:37.418+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO SparkContext: Starting job: $anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128
+[2025-05-26T07:36:37.419+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO DAGScheduler: Job 2 finished: $anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128, took 0.000300 s
+[2025-05-26T07:36:37.489+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO OptimisticTransaction: [tableId=587f3f1d,txnId=47ee5294] Attempting to commit version 0 with 4 actions with Serializable isolation level
+[2025-05-26T07:36:37.733+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO OptimisticTransaction: Incremental commit: starting with snapshot version -1
+[2025-05-26T07:36:37.930+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO CodeGenerator: Code generated in 78.904886 ms
+[2025-05-26T07:36:37.943+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO SparkContext: Starting job: $anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128
+[2025-05-26T07:36:37.944+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO DAGScheduler: Job 3 finished: $anonfun$recordDeltaOperationInternal$1 at DatabricksLogging.scala:128, took 0.000250 s
+[2025-05-26T07:36:37.951+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO DeltaLog: Creating a new snapshot v0 for commit version 0
+[2025-05-26T07:36:37.952+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO DeltaLog: Loading version 0.
+[2025-05-26T07:36:37.955+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO Snapshot: [tableId=587f3f1d-971b-4ae6-803a-1dad86fb70fa] Created snapshot Snapshot(path=s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log, version=0, metadata=Metadata(0fca14a1-0f42-439f-bba5-85ea9b92296f,null,null,Format(parquet,Map()),{"type":"struct","fields":[{"name":"Time_Key","type":"integer","nullable":true,"metadata":{}},{"name":"Time","type":"string","nullable":true,"metadata":{}},{"name":"Hour","type":"integer","nullable":true,"metadata":{}},{"name":"Minute","type":"integer","nullable":true,"metadata":{}},{"name":"Second","type":"integer","nullable":true,"metadata":{}}]},ArrayBuffer(),Map(),Some(1748244977298)), logSegment=LogSegment(s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log,0,List(S3AFileStatus{path=s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log/00000000000000000000.json; isDirectory=false; length=1583; replication=1; blocksize=33554432; modification_time=1748244997000; access_time=0; owner=airflow; group=airflow; permission=rw-rw-rw-; isSymlink=false; hasAcl=false; isEncrypted=true; isErasureCoded=false} isEmptyDirectory=FALSE eTag=c76054daa3c0258ee2ab8016595f20d8 versionId=null),org.apache.spark.sql.delta.EmptyCheckpointProvider$@576267a8,1748244997000), checksumOpt=Some(VersionChecksum(Some(47ee5294-1b0f-45fe-81c6-f4adbd77010b),640562,1,None,None,1,1,None,Some(Stream()),Some(Stream()),Metadata(0fca14a1-0f42-439f-bba5-85ea9b92296f,null,null,Format(parquet,Map()),{"type":"struct","fields":[{"name":"Time_Key","type":"integer","nullable":true,"metadata":{}},{"name":"Time","type":"string","nullable":true,"metadata":{}},{"name":"Hour","type":"integer","nullable":true,"metadata":{}},{"name":"Minute","type":"integer","nullable":true,"metadata":{}},{"name":"Second","type":"integer","nullable":true,"metadata":{}}]},ArrayBuffer(),Map(),Some(1748244977298)),Protocol(1,2),None,None,Some(Stream(AddFile(part-00000-7f40b0fd-cc90-4c98-b93b-1420644d15e8-c000.snappy.parquet,Map(),640562,1748244995000,false,{"numRecords":86400,"minValues":{"Time_Key":0,"Time":"00:00:00","Hour":0,"Minute":0,"Second":0},"maxValues":{"Time_Key":235959,"Time":"23:59:59","Hour":23,"Minute":59,"Second":59},"nullCount":{"Time_Key":0,"Time":0,"Hour":0,"Minute":0,"Second":0}},null,null,None,None,None))))))
+[2025-05-26T07:36:37.956+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO DeltaLog: Updated snapshot to Snapshot(path=s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log, version=0, metadata=Metadata(0fca14a1-0f42-439f-bba5-85ea9b92296f,null,null,Format(parquet,Map()),{"type":"struct","fields":[{"name":"Time_Key","type":"integer","nullable":true,"metadata":{}},{"name":"Time","type":"string","nullable":true,"metadata":{}},{"name":"Hour","type":"integer","nullable":true,"metadata":{}},{"name":"Minute","type":"integer","nullable":true,"metadata":{}},{"name":"Second","type":"integer","nullable":true,"metadata":{}}]},ArrayBuffer(),Map(),Some(1748244977298)), logSegment=LogSegment(s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log,0,List(S3AFileStatus{path=s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log/00000000000000000000.json; isDirectory=false; length=1583; replication=1; blocksize=33554432; modification_time=1748244997000; access_time=0; owner=airflow; group=airflow; permission=rw-rw-rw-; isSymlink=false; hasAcl=false; isEncrypted=true; isErasureCoded=false} isEmptyDirectory=FALSE eTag=c76054daa3c0258ee2ab8016595f20d8 versionId=null),org.apache.spark.sql.delta.EmptyCheckpointProvider$@576267a8,1748244997000), checksumOpt=Some(VersionChecksum(Some(47ee5294-1b0f-45fe-81c6-f4adbd77010b),640562,1,None,None,1,1,None,Some(Stream()),Some(Stream()),Metadata(0fca14a1-0f42-439f-bba5-85ea9b92296f,null,null,Format(parquet,Map()),{"type":"struct","fields":[{"name":"Time_Key","type":"integer","nullable":true,"metadata":{}},{"name":"Time","type":"string","nullable":true,"metadata":{}},{"name":"Hour","type":"integer","nullable":true,"metadata":{}},{"name":"Minute","type":"integer","nullable":true,"metadata":{}},{"name":"Second","type":"integer","nullable":true,"metadata":{}}]},ArrayBuffer(),Map(),Some(1748244977298)),Protocol(1,2),None,None,Some(Stream(AddFile(part-00000-7f40b0fd-cc90-4c98-b93b-1420644d15e8-c000.snappy.parquet,Map(),640562,1748244995000,false,{"numRecords":86400,"minValues":{"Time_Key":0,"Time":"00:00:00","Hour":0,"Minute":0,"Second":0},"maxValues":{"Time_Key":235959,"Time":"23:59:59","Hour":23,"Minute":59,"Second":59},"nullCount":{"Time_Key":0,"Time":0,"Hour":0,"Minute":0,"Second":0}},null,null,None,None,None))))))
+[2025-05-26T07:36:37.964+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO DeltaLogFileIndex: Created DeltaLogFileIndex(JSON, numFilesInSegment: 1, totalFileSize: 1583)
+[2025-05-26T07:36:37.983+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO OptimisticTransaction: [tableId=587f3f1d,txnId=47ee5294] Committed delta #0 to s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log
+[2025-05-26T07:36:37.985+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:37 INFO ChecksumHook: Writing checksum file for table path s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log version 0
+[2025-05-26T07:36:38.016+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO deprecation: org.apache.hadoop.shaded.io.bytes.per.checksum is deprecated. Instead, use dfs.bytes-per-checksum
+[2025-05-26T07:36:38.076+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO CheckpointFileManager: Writing atomically to s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log/00000000000000000000.crc using temp file s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log/.00000000000000000000.crc.16f8aac8-c708-4618-b39e-0c0b02051acf.tmp
+[2025-05-26T07:36:38.346+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO CheckpointFileManager: Renamed temp file s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log/.00000000000000000000.crc.16f8aac8-c708-4618-b39e-0c0b02051acf.tmp to s3a://medical-bucket/curated/transactional/medical-data-sample/dim_time/_delta_log/00000000000000000000.crc
+[2025-05-26T07:36:38.350+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO CreateDeltaTableCommand: Table is path-based table: false. Update catalog with mode: CreateOrReplace
+[2025-05-26T07:36:38.376+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 WARN HiveExternalCatalog: Couldn't find corresponding Hive SerDe for data source provider delta. Persisting data source table `spark_catalog`.`curated`.`dim_time` into Hive metastore in Spark SQL specific format, which is NOT compatible with Hive.
+[2025-05-26T07:36:38.705+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO SparkContext: Invoking stop() from shutdown hook
+[2025-05-26T07:36:38.705+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO SparkContext: SparkContext is stopping with exitCode 0.
+[2025-05-26T07:36:38.713+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO SparkUI: Stopped Spark web UI at http://airflow-scheduler:4040
+[2025-05-26T07:36:38.714+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO StandaloneSchedulerBackend: Shutting down all executors
+[2025-05-26T07:36:38.715+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Asking each executor to shut down
+[2025-05-26T07:36:38.725+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+[2025-05-26T07:36:38.736+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO MemoryStore: MemoryStore cleared
+[2025-05-26T07:36:38.737+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO BlockManager: BlockManager stopped
+[2025-05-26T07:36:38.739+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO BlockManagerMaster: BlockManagerMaster stopped
+[2025-05-26T07:36:38.741+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+[2025-05-26T07:36:38.766+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO SparkContext: Successfully stopped SparkContext
+[2025-05-26T07:36:38.767+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO ShutdownHookManager: Shutdown hook called
+[2025-05-26T07:36:38.767+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO ShutdownHookManager: Deleting directory /tmp/spark-22c5c0d6-a4e6-4fa6-882a-fd21fb70e631/pyspark-428432e7-2d7c-46ca-b021-9f2cd142c877
+[2025-05-26T07:36:38.770+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO ShutdownHookManager: Deleting directory /tmp/hive-v3_1-4d9358c9-2d16-48c5-9a2c-9cc329e20ca4
+[2025-05-26T07:36:38.774+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO ShutdownHookManager: Deleting directory /tmp/spark-22c5c0d6-a4e6-4fa6-882a-fd21fb70e631
+[2025-05-26T07:36:38.776+0000] {spark_submit.py:649} INFO - 25/05/26 07:36:38 INFO ShutdownHookManager: Deleting directory /tmp/spark-8ab52c28-0e14-416e-860d-9550eea6e8e0
+[2025-05-26T07:36:38.857+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-26T07:36:38.858+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=medical_dag_v23, task_id=dim_group.creating_dim_time, run_id=manual__2025-05-26T07:21:13.214910+00:00, execution_date=20250526T072113, start_date=20250526T073607, end_date=20250526T073638
+[2025-05-26T07:36:38.903+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-26T07:36:38.912+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-05-26T07:36:38.913+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

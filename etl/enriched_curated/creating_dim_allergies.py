@@ -47,7 +47,6 @@ def main():
     enriched_allergies__full_path = f'{enriched_path}/{enriched_allergies__table_name}'
     enriched_allergies__df = spark.read.format('delta').option('path', enriched_allergies__full_path).load()
     
-    # DIM ALLERGIES---------------------------------------------
     dim_default_allergies__df = spark.sql('''
         SELECT
             '0000000000000000000000000000000000000000000000000000000000000000' AS Allergy_Key
@@ -98,102 +97,6 @@ def main():
         )
     
     
-    # BRIDAGE ALLERGY GROUP--------------------------------------------
-    bridge_null_allergy_group__df = (
-        enriched_encounters__df.alias('encounters')
-        .join(
-            enriched_allergies__df.alias('allergies')
-            , (F.col('encounters.ID') == F.col('allergies.ENCOUNTER'))
-            , 'leftanti'
-        )
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Allergy_Group_Key')
-            , F.lit('0000000000000000000000000000000000000000000000000000000000000000').alias('Allergy_Key')
-        )
-        .dropDuplicates()
-    )
-    bridge_allergy_group__df = (
-        enriched_allergies__df
-        .select(
-            F.sha2(F.col('ENCOUNTER'), 256).alias('Allergy_Group_Key')
-            , F.sha2(
-                F.concat_ws(
-                    '|'
-                    , F.ifnull(F.col('CODE'), F.lit(0))
-                    , F.ifnull(F.col('SYSTEM'), F.lit('Unknown'))
-                    , F.ifnull(F.col('DESCRIPTION'), F.lit('Unknown'))
-                )
-                , 256
-            ).alias('Allergy_Key')
-        )
-        .dropDuplicates()
-        .unionAll(bridge_null_allergy_group__df)
-        .orderBy(F.col('Allergy_Group_Key'))
-    )
-    
-    bridge_allergy_group__is_existing = DeltaTable.isDeltaTable(spark, bridge_allergy_group__full_path)
-    if not bridge_allergy_group__is_existing:
-        bridge_allergy_group__df.write.mode('overwrite').format('delta').option('path', bridge_allergy_group__full_path).saveAsTable(bridge_allergy_group__table_name)
-    else:
-        bridge_allergy_group__delta_table = DeltaTable.forName(spark, bridge_allergy_group__table_name)
-        
-        bridge_allergy_group__deleted_rows = (
-            bridge_allergy_group__delta_table.toDF().where((F.col('Allergy_Key') == '0000000000000000000000000000000000000000000000000000000000000000')).alias('target')
-            .join(
-                bridge_allergy_group__df.alias('source')
-                , (F.col('source.Allergy_Group_Key') == F.col('target.Allergy_Group_Key'))
-                , 'leftsemi'
-            )
-        )
-        
-        (
-            bridge_allergy_group__delta_table.alias('target').merge(
-                source = bridge_allergy_group__deleted_rows.alias('source')
-                , condition = (
-                    (F.col('source.Allergy_Group_Key') == F.col('target.Allergy_Group_Key'))
-                )
-            )
-            .whenMatchedDelete()
-            .execute()
-        )
-    
-        (
-            bridge_allergy_group__delta_table.alias('target').merge(
-                source = bridge_allergy_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Allergy_Group_Key') == F.col('target.Allergy_Group_Key'))
-                    & (F.col('source.Allergy_Key') == F.col('target.Allergy_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
-    
-    # DIM ALLERGY GROUP--------------------------------------------
-    
-    dim_allergy_group__df = (
-        enriched_encounters__df
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Allergy_Group_Key')
-        )
-        .dropDuplicates()
-    )
-    dim_allergy_group__is_existing = DeltaTable.isDeltaTable(spark,dim_allergy_group__full_path)
-    
-    if not dim_allergy_group__is_existing:
-        dim_allergy_group__df.write.mode('overwrite').option('path', dim_allergy_group__full_path).saveAsTable(dim_allergy_group__table_name)
-    else:
-        dim_allergy_group__delta_table = DeltaTable.forName(spark, dim_allergy_group__table_name)
-        (
-            dim_allergy_group__delta_table.alias('target').merge(
-                source = dim_allergy_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Allergy_Group_Key') == F.col('target.Allergy_Group_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
         
 if __name__ == '__main__':
     main()

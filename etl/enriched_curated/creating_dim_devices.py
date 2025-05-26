@@ -47,7 +47,7 @@ def main():
     enriched_devices__full_path = f'{enriched_path}/{enriched_devices__table_name}'
     enriched_devices__df = spark.read.format('delta').option('path', enriched_devices__full_path).load()
     
-    # # DIM DEVICES---------------------------------------------
+
     dim_default_devices__df = spark.sql('''
         SELECT
             '0000000000000000000000000000000000000000000000000000000000000000' AS Device_Key
@@ -99,102 +99,6 @@ def main():
             .execute()
         )
     
-    
-    # BRIDAGE DEVICE GROUP--------------------------------------------
-    bridge_null_device_group__df = (
-        enriched_encounters__df.alias('encounters')
-        .join(
-            enriched_devices__df.alias('devices')
-            , (F.col('encounters.ID') == F.col('devices.ENCOUNTER'))
-            , 'leftanti'
-        )
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Device_Group_Key')
-            , F.lit('0000000000000000000000000000000000000000000000000000000000000000').alias('Device_Key')
-        )
-        .dropDuplicates()
-    )
-    
-    bridge_device_group__df = (
-        enriched_devices__df
-        .select(
-            F.sha2(F.col('ENCOUNTER'), 256).alias('Device_Group_Key')
-            , F.sha2(
-                F.concat_ws(
-                    '|'
-                    , F.ifnull(F.col('CODE'), F.lit(0)).alias('Device_Code')
-                    , F.ifnull(F.col('DESCRIPTION'), F.lit('Unknown')).alias('Device_Description')
-                    , F.ifnull(F.col('UDI'), F.lit('Unknown')).alias('Device_UDI')
-                )
-                , 256
-            ).alias('Device_Key')
-        )
-        .dropDuplicates()
-        .unionAll(bridge_null_device_group__df)
-        .orderBy(F.col('Device_Group_Key'))
-    )
-    
-    bridge_device_group__is_existing = DeltaTable.isDeltaTable(spark, bridge_device_group__full_path)
-    if not bridge_device_group__is_existing:
-        bridge_device_group__df.write.mode('overwrite').format('delta').option('path', bridge_device_group__full_path).saveAsTable(bridge_device_group__table_name)
-    else:
-        bridge_device_group__delta_table = DeltaTable.forName(spark, bridge_device_group__table_name)
-        
-        bridge_device_group__deleted_rows = (
-            bridge_device_group__delta_table.toDF().where((F.col('Device_Key') == '0000000000000000000000000000000000000000000000000000000000000000')).alias('target')
-            .join(
-                bridge_device_group__df.alias('source')
-                , (F.col('source.Device_Group_Key') == F.col('target.Device_Group_Key'))
-                , 'leftsemi'
-            )
-        )
-        
-        (
-            bridge_device_group__delta_table.alias('target').merge(
-                source = bridge_device_group__deleted_rows.alias('source')
-                , condition = (
-                    (F.col('source.Device_Group_Key') == F.col('target.Device_Group_Key'))
-                )
-            )
-            .whenMatchedDelete()
-            .execute()
-        )
-    
-        (
-            bridge_device_group__delta_table.alias('target').merge(
-                source = bridge_device_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Device_Group_Key') == F.col('target.Device_Group_Key'))
-                    & (F.col('source.Device_Key') == F.col('target.Device_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
-    
-    # # DIM DEVICE GROUP--------------------------------------------
-    dim_device_group__df = (
-        enriched_encounters__df
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Device_Group_Key')
-        )
-        .dropDuplicates()
-    )
-    
-    dim_device_group__is_existing = DeltaTable.isDeltaTable(spark, dim_device_group__full_path)
-    if not dim_device_group__is_existing:
-        dim_device_group__df.write.mode('overwrite').format('delta').option('path', dim_device_group__full_path).saveAsTable(dim_device_group__table_name)
-    else:
-        dim_device_group__delta_table = DeltaTable.forName(spark, dim_device_group__table_name)
-        (
-            dim_device_group__delta_table.alias('target').merge(
-                source = dim_device_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Device_Group_Key') == F.col('target.Device_Group_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
+
 if __name__ == '__main__':
     main()

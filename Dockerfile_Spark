@@ -3,9 +3,16 @@ USER root
 
 RUN apt-get update && apt-get install -y ca-certificates
 
-COPY minio/minio-certs/public.crt /usr/local/share/ca-certificates/
+COPY minio/minio-certs/public.crt /usr/local/share/ca-certificates/public_minio.crt
+COPY trino/trino-certs/public.crt /usr/local/share/ca-certificates/public_trino.crt
 
 RUN update-ca-certificates
+
+COPY minio/minio-certs/public.crt /tmp/minio-cert.crt 
+COPY trino/trino-certs/public.crt /tmp/trino-cert.crt 
+
+RUN keytool -importcert -file /tmp/minio-cert.crt -alias minio-ca -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+RUN keytool -importcert -file /tmp/trino-cert.crt -alias trino-ca -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
 
 COPY spark/requirements.txt /tmp/requirements.txt
 RUN pip install --timeout=1000 -r /tmp/requirements.txt

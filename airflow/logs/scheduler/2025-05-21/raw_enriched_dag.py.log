@@ -2322,3 +2322,24 @@
 [2025-05-21T08:11:16.224+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:11:16.224+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2025-05-21T08:11:16.231+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:11:16.231+0000] {dag.py:4180} INFO - Setting next_dagrun for medical_dag_v18 to None, run_after=None
 [2025-05-21T08:11:16.247+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/raw_enriched_dag.py took 0.115 seconds
+[2025-05-21T08:11:46.412+0000] {processor.py:186} INFO - Started process (PID=2421) to work on /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:11:46.413+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/raw_enriched_dag.py for tasks to queue
+[2025-05-21T08:11:46.413+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:11:46.413+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:11:46.428+0000] {processor.py:925} INFO - DAG(s) 'medical_dag_v18' retrieved from /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:11:46.501+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:11:46.501+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-05-21T08:11:46.508+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:11:46.508+0000] {dag.py:4180} INFO - Setting next_dagrun for medical_dag_v18 to None, run_after=None
+[2025-05-21T08:11:46.525+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/raw_enriched_dag.py took 0.115 seconds
+[2025-05-21T08:12:17.303+0000] {processor.py:186} INFO - Started process (PID=2437) to work on /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:12:17.304+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/raw_enriched_dag.py for tasks to queue
+[2025-05-21T08:12:17.306+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:12:17.305+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:12:17.335+0000] {processor.py:925} INFO - DAG(s) 'medical_dag_v18' retrieved from /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:12:17.408+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:12:17.408+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-05-21T08:12:17.415+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:12:17.415+0000] {dag.py:4180} INFO - Setting next_dagrun for medical_dag_v18 to None, run_after=None
+[2025-05-21T08:12:17.432+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/raw_enriched_dag.py took 0.133 seconds
+[2025-05-21T08:12:47.588+0000] {processor.py:186} INFO - Started process (PID=2453) to work on /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:12:47.588+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/raw_enriched_dag.py for tasks to queue
+[2025-05-21T08:12:47.589+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:12:47.589+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:12:47.610+0000] {processor.py:925} INFO - DAG(s) 'medical_dag_v18' retrieved from /opt/airflow/dags/raw_enriched_dag.py
+[2025-05-21T08:12:47.676+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:12:47.675+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-05-21T08:12:47.682+0000] {logging_mixin.py:190} INFO - [2025-05-21T08:12:47.682+0000] {dag.py:4180} INFO - Setting next_dagrun for medical_dag_v18 to None, run_after=None
+[2025-05-21T08:12:47.710+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/raw_enriched_dag.py took 0.125 seconds

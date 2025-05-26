@@ -47,64 +47,6 @@ def main():
     enriched_imaging_studies__full_path = f'{enriched_path}/{enriched_imaging_studies__table_name}'
     enriched_imaging_studies__df = spark.read.format('delta').option('path', enriched_imaging_studies__full_path).load()
     
-    # # DIM CARE PLANS---------------------------------------------
-    dim_default_imaging_studies__df = spark.sql('''
-        SELECT
-            '0000000000000000000000000000000000000000000000000000000000000000' AS Imaging_Study_Key
-            , CAST(0 AS LONG) AS Imaging_Study_Bodysite_Code
-            , 'Unknown' AS Imaging_Study_Bodysite_Description
-            , 'Unknown' AS Imaging_Study_Modality_Code
-            , 'Unknown' AS Imaging_Study_Modality_Description
-    ''')
-    
-    dim_imaging_studies__df = (
-        enriched_imaging_studies__df
-        .select(
-            F.ifnull(F.col('BODYSITE_CODE'), F.lit(0)).alias('Imaging_Study_Bodysite_Code')
-            , F.ifnull(F.col('BODYSITE_DESCRIPTION'), F.lit('Unknown')).alias('Imaging_Study_Bodysite_Description')
-            , F.ifnull(F.col('MODALITY_CODE'), F.lit('Unknown')).alias('Imaging_Study_Modality_Code')
-            , F.ifnull(F.col('MODALITY_DESCRIPTION'), F.lit('Unknown')).alias('Imaging_Study_Modality_Description')
-        )
-        .dropDuplicates()
-        .select(
-            F.sha2(
-                F.concat_ws(
-                    '|'
-                    , F.col('Imaging_Study_Bodysite_Code')
-                    , F.col('Imaging_Study_Bodysite_Description')
-                    , F.col('Imaging_Study_Modality_Code')
-                    , F.col('Imaging_Study_Modality_Description')
-                    
-                )
-                , 256
-            ).alias('Imaging_Study_Key')
-            , F.col('Imaging_Study_Bodysite_Code')
-            , F.col('Imaging_Study_Bodysite_Description')
-            , F.col('Imaging_Study_Modality_Code')
-            , F.col('Imaging_Study_Modality_Description')
-        )
-        .unionAll(dim_default_imaging_studies__df)
-        .orderBy(F.col('Imaging_Study_Bodysite_Code').asc())
-    )
-    
-    dim_imaging_studies__is_existing = DeltaTable.isDeltaTable(spark, dim_imaging_studies__full_path)
-    if not dim_imaging_studies__is_existing:
-        dim_imaging_studies__df.write.mode('overwrite').format('delta').option('path', dim_imaging_studies__full_path).saveAsTable(dim_imaging_studies__table_name)
-    else:
-        dim_imaging_studies__delta_table = DeltaTable.forName(spark, dim_imaging_studies__table_name)
-        (
-            dim_imaging_studies__delta_table.alias('target').merge(
-                source = dim_imaging_studies__df.alias('source')
-                , condition = (
-                    (F.col('source.Imaging_Study_Key') == F.col('target.Imaging_Study_Key'))     
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
-    
-    
-    # BRIDAGE CARE PLAN GROUP--------------------------------------------
     bridge_null_imaging_study_group__df = (
         enriched_encounters__df.alias('encounters')
         .join(
@@ -177,29 +119,6 @@ def main():
             .execute()
         )
     
-    # # DIM imaging_study GROUP--------------------------------------------
-    dim_imaging_study_group__df = (
-        enriched_encounters__df
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Imaging_Study_Group_Key')
-        )
-        .dropDuplicates()
-    )
-    
-    dim_imaging_study_group__is_existing = DeltaTable.isDeltaTable(spark, dim_imaging_study_group__full_path)
-    if not dim_imaging_study_group__is_existing:
-        dim_imaging_study_group__df.write.mode('overwrite').format('delta').option('path', dim_imaging_study_group__full_path).saveAsTable(dim_imaging_study_group__table_name)
-    else:
-        dim_imaging_study_group__delta_table = DeltaTable.forName(spark, dim_imaging_study_group__table_name)
-        (
-            dim_imaging_study_group__delta_table.alias('target').merge(
-                source = dim_imaging_study_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Imaging_Study_Group_Key') == F.col('target.Imaging_Study_Group_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
+ 
 if __name__ == '__main__':
     main()

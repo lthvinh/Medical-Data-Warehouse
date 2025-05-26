@@ -246,22 +246,36 @@ services:
     environment:
       - SPARK_MODE=master
     volumes:
-      - ./src:/opt/spark-apps
+      - ./etl:/opt/etl
     ports:
       - 8080:8080
       - 7077:7077
     networks:
       - medical-network
 
-  spark-worker:
+  spark-worker-1:
     image: spark:ca-certs
-    container_name: spark-worker
-    hostname: spark-worker
+    container_name: spark-worker-1
+    hostname: spark-worker-1
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
     volumes:
-      - ./src:/opt/spark-apps
+      - ./etl:/opt/etl
+    depends_on:
+      - spark-master
+    networks:
+      - medical-network
+
+  spark-worker-2:
+    image: spark:ca-certs
+    container_name: spark-worker-2
+    hostname: spark-worker-2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./etl:/opt/etl
     depends_on:
       - spark-master
     networks:

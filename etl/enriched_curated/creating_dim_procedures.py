@@ -47,7 +47,6 @@ def main():
     enriched_procedures__full_path = f'{enriched_path}/{enriched_procedures__table_name}'
     enriched_procedures__df = spark.read.format('delta').option('path', enriched_procedures__full_path).load()
     
-    # # DIM PROCEDURES---------------------------------------------
     dim_default_procedures__df = spark.sql('''
         SELECT
             '0000000000000000000000000000000000000000000000000000000000000000' AS Procedure_Key
@@ -100,101 +99,6 @@ def main():
         )
     
     
-    # BRIDAGE PROCEDURE GROUP--------------------------------------------
-    bridge_null_procedure_group__df = (
-        enriched_encounters__df.alias('encounters')
-        .join(
-            enriched_procedures__df.alias('procedures')
-            , (F.col('encounters.ID') == F.col('procedures.ENCOUNTER'))
-            , 'leftanti'
-        )
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Procedure_Group_Key')
-            , F.lit('0000000000000000000000000000000000000000000000000000000000000000').alias('Procedure_Key')
-        )
-        .dropDuplicates()
-    )
-    
-    bridge_procedure_group__df = (
-        enriched_procedures__df
-        .select(
-            F.sha2(F.col('ENCOUNTER'), 256).alias('Procedure_Group_Key')
-            , F.sha2(
-                F.concat_ws(
-                    '|'
-                    , F.ifnull(F.col('CODE'), F.lit(0))
-                    , F.ifnull(F.col('DESCRIPTION'), F.lit('Unknown'))
-                    , F.ifnull(F.col('BASE_COST'), F.lit(0.0))
-                )
-                , 256
-            ).alias('Procedure_Key')
-        )
-        .dropDuplicates()
-        .unionAll(bridge_null_procedure_group__df)
-        .orderBy(F.col('Procedure_Group_Key'))
-    )
-    
-    bridge_procedure_group__is_existing = DeltaTable.isDeltaTable(spark, bridge_procedure_group__full_path)
-    if not bridge_procedure_group__is_existing:
-        bridge_procedure_group__df.write.mode('overwrite').format('delta').option('path', bridge_procedure_group__full_path).saveAsTable(bridge_procedure_group__table_name)
-    else:
-        bridge_procedure_group__delta_table = DeltaTable.forName(spark, bridge_procedure_group__table_name)
-        
-        bridge_procedure_group__deleted_rows = (
-            bridge_procedure_group__delta_table.toDF().where((F.col('Procedure_Key') == '0000000000000000000000000000000000000000000000000000000000000000')).alias('target')
-            .join(
-                bridge_procedure_group__df.alias('source')
-                , (F.col('source.Procedure_Group_Key') == F.col('target.Procedure_Group_Key'))
-                , 'leftsemi'
-            )
-        )
-        
-        (
-            bridge_procedure_group__delta_table.alias('target').merge(
-                source = bridge_procedure_group__deleted_rows.alias('source')
-                , condition = (
-                    (F.col('source.Procedure_Group_Key') == F.col('target.Procedure_Group_Key'))
-                )
-            )
-            .whenMatchedDelete()
-            .execute()
-        )
-    
-        (
-            bridge_procedure_group__delta_table.alias('target').merge(
-                source = bridge_procedure_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Procedure_Group_Key') == F.col('target.Procedure_Group_Key'))
-                    & (F.col('source.Procedure_Key') == F.col('target.Procedure_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
-    
-    # DIM PROCEDURE GROUP--------------------------------------------
-    dim_procedure_group__df = (
-        enriched_encounters__df
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Procedure_Group_Key')
-        )
-        .dropDuplicates()
-    )
-    
-    dim_procedure_group__is_existing = DeltaTable.isDeltaTable(spark, dim_procedure_group__full_path)
-    if not dim_procedure_group__is_existing:
-        dim_procedure_group__df.write.mode('overwrite').format('delta').option('path', dim_procedure_group__full_path).saveAsTable(dim_procedure_group__table_name)
-    else:
-        dim_procedure_group__delta_table = DeltaTable.forName(spark, dim_procedure_group__table_name)
-        (
-            dim_procedure_group__delta_table.alias('target').merge(
-                source = dim_procedure_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Procedure_Group_Key') == F.col('target.Procedure_Group_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
+
 if __name__ == '__main__':
     main()

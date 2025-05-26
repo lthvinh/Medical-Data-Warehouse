@@ -48,7 +48,7 @@ def main():
     enriched_conditions__full_path = f'{enriched_path}/{enriched_conditions__table_name}'
     enriched_conditions__df = spark.read.format('delta').option('path', enriched_conditions__full_path).load()
     
-    # DIM CONIDTIONS---------------------------------------------
+
     dim_default_conditions__df = spark.sql('''
         SELECT
             '0000000000000000000000000000000000000000000000000000000000000000' AS Condition_Key
@@ -96,101 +96,7 @@ def main():
         )
     
     
-    # BRIDAGE CONDITIONS GROUP--------------------------------------------
-    bridge_null_condition_group__df = (
-        enriched_encounters__df.alias('encounters')
-        .join(
-            enriched_conditions__df.alias('conditions')
-            , (F.col('encounters.ID') == F.col('conditions.ENCOUNTER'))
-            , 'leftanti'
-        )
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Condition_Group_Key')
-            , F.lit('0000000000000000000000000000000000000000000000000000000000000000').alias('Condition_Key')
-        )
-        .dropDuplicates()
-    )
-    
-    bridge_condition_group__df = (
-        enriched_conditions__df
-        .select(
-            F.sha2(F.col('ENCOUNTER'), 256).alias('Condition_Group_Key')
-            , F.sha2(
-                F.concat_ws(
-                    '|'
-                    , F.ifnull(F.col('CODE'), F.lit(0))
-                    , F.ifnull(F.col('DESCRIPTION'), F.lit('Unknown'))
-                )
-                , 256
-            ).alias('Condition_Key')
-        )
-        .dropDuplicates()
-        .unionAll(bridge_null_condition_group__df)
-        .orderBy(F.col('Condition_Group_Key'))
-    )
-    
-    bridge_condition_group__is_existing = DeltaTable.isDeltaTable(spark, bridge_condition_group__full_path)
-    if not bridge_condition_group__is_existing:
-        bridge_condition_group__df.write.mode('overwrite').format('delta').option('path', bridge_condition_group__full_path).saveAsTable(bridge_condition_group__table_name)
-    else:
-        bridge_condition_group__delta_table = DeltaTable.forName(spark, bridge_condition_group__table_name)
-        
-        bridge_condition_group__deleted_rows = (
-            bridge_condition_group__delta_table.toDF().where((F.col('Condition_Key') == '0000000000000000000000000000000000000000000000000000000000000000')).alias('target')
-            .join(
-                bridge_condition_group__df.alias('source')
-                , (F.col('source.Condition_Group_Key') == F.col('target.Condition_Group_Key'))
-                , 'leftsemi'
-            )
-        )
-        
-        (
-            bridge_condition_group__delta_table.alias('target').merge(
-                source = bridge_condition_group__deleted_rows.alias('source')
-                , condition = (
-                    (F.col('source.Condition_Group_Key') == F.col('target.Condition_Group_Key'))
-                )
-            )
-            .whenMatchedDelete()
-            .execute()
-        )
-    
-        (
-            bridge_condition_group__delta_table.alias('target').merge(
-                source = bridge_condition_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Condition_Group_Key') == F.col('target.Condition_Group_Key'))
-                    & (F.col('source.Condition_Key') == F.col('target.Condition_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
-    
-    # # DIM CONDITIONS GROUP--------------------------------------------
-    dim_condition_group__df = (
-        enriched_encounters__df
-        .select(
-            F.sha2(F.col('ID'), 256).alias('Condition_Group_Key')
-        )
-        .dropDuplicates()
-    )
-    
-    dim_condition_group__is_existing = DeltaTable.isDeltaTable(spark, dim_condition_group__full_path)
-    if not dim_condition_group__is_existing:
-        dim_condition_group__df.write.mode('overwrite').format('delta').option('path', dim_condition_group__full_path).saveAsTable(dim_condition_group__table_name)
-    else:
-        dim_condition_group__delta_table = DeltaTable.forName(spark, dim_condition_group__table_name)
-        (
-            dim_condition_group__delta_table.alias('target').merge(
-                source = dim_condition_group__df.alias('source')
-                , condition = (
-                    (F.col('source.Condition_Group_Key') == F.col('target.Condition_Group_Key'))
-                )
-            )
-            .whenNotMatchedInsertAll()
-            .execute()
-        )
+
 
 if __name__ == '__main__':
     main()
