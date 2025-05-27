@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Observation_Key)"
+	)
+}}
+
 with dim_default_observations as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Observation_Key
@@ -28,7 +37,16 @@ with dim_default_observations as(
 	select * from hashed_key
 )
 
-select * from dim_observations
+select source.* from dim_observations as source
+
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Observation_Key = target.Observation_Key
+where
+	target.Observation_Key is null
+{% endif %}
+
 order by Observation_Code
 
 

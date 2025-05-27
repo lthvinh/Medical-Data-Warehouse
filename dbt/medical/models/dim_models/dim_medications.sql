@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Medication_Key)"
+	)
+}}
+
 with dim_default_medications as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Medication_Key
@@ -27,6 +36,16 @@ with dim_default_medications as(
 	select * from hashed_key
 )
 
-select * from dim_medications
+select * from dim_medications as source
+
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Medication_Key = target.Medication_Key
+where
+	target.Medication_Key is null
+
+{% endif %}
+
 order by Medication_Code
 

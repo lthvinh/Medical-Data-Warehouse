@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Imaging_Study_Key)"
+	)
+}}
+
 with dim_default_imaging_studies as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Imaging_Study_Key
@@ -30,6 +39,16 @@ with dim_default_imaging_studies as(
 	select * from hashed_key
 )
 
-select * from dim_imaging_studies
+select source.* from dim_imaging_studies as source
+
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Imaging_Study_Key = target.Imaging_Study_Key
+where
+	target.Imaging_Study_Key is null
+	
+{% endif %}
+
 order by Imaging_Study_Bodysite_Code
 

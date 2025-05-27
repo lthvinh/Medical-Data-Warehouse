@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = 'incremental'
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Allergy_Code)"
+	)
+}}
+
 with dim_default_allergies as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' as Allergy_Key
@@ -28,6 +37,16 @@ with dim_default_allergies as(
 	select * from hashed_key
 )
 
-select * from dim_allergies
+select source.* from dim_allergies as source
+
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Allergy_Key = target.Allergy_Key
+where
+	target.Allergy_Key is null
+
+{% endif %}
+
 order by Allergy_Code
 

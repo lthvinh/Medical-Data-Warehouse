@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Allergy_Group_Key)"
+	)
+}}
+
 with dim_default_supplies as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' as Supply_Key

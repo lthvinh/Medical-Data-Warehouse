@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Encounter_Reason_Code_Key)"
+	)
+}}
+
 with dim_default_encounter_reason_codes as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Encounter_Reason_Code_Key
@@ -25,6 +34,16 @@ with dim_default_encounter_reason_codes as(
 	select * from hashed_key
 )
 
-select * from dim_encounter_reason_codes
+select source.* from dim_encounter_reason_codes as source
+
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Encounter_Reason_Code_Key = target.Encounter_Reason_Code_Key
+where
+	target.Encounter_Reason_Code_Key is null
+	
+{% endif %}
+
 order by Encounter_Reason_Code
 

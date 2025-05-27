@@ -1,9 +1,10 @@
 {{
 	config(
 		materialized = 'incremental'
+		, incremental_strategy = "insert_overwrite"
 		, engine = 'MergeTree()'
-		, unique_Key = '(Allergy_Group_Key, Allergy_Key)'
-		, order_by = '(Allergy_Key, Allergy_Key)'
+		, partition_by = '(Allergy_Group_Key)'
+		, order_by = '(Allergy_Group_Key)'
 	)
 }}
 with enriched_encounters as (
@@ -57,13 +58,4 @@ select
 	*
 from 
 	bridge_allergy_group as source
-{% if is_incremental() %}
-where
-	not exists (
-		select
-			1
-		from
-			{{ this }} as t
-		where
-			s.Allergy_Group_Key
-	)
+

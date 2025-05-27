@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Encounter_Code_Key)"
+	)
+}}
+
 with dim_default_encounter_codes as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Encounter_Code_Key
@@ -27,6 +36,17 @@ with dim_default_encounter_codes as(
 	union all
 	select * from hashed_key
 )
-select * from dim_encounter_codes
+
+select * from dim_encounter_codes as source
+
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Encounter_Code_Key = target.Encounter_Code_Key
+where
+	target.Encounter_Code_Key is null
+
+{% endif %}
+
 order by Encounter_Code
 

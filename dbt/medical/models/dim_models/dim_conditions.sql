@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Condition_Key)"
+	)
+}}
+
 with dim_default_conditions as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Condition_Key
@@ -26,6 +35,14 @@ with dim_default_conditions as(
 	select * from hashed_key
 )
 
-select * from dim_conditions
+select * from dim_conditions as source
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Condition_Key = target.Condition_Key
+where
+	target.Condition_Key is null
+
+{% endif %}
 order by Condition_Code
 

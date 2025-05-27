@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Immunization_Key)"
+	)
+}}
+
 with dim_default_immunizations as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Immunization_Key
@@ -27,7 +36,12 @@ with dim_default_immunizations as(
 	select * from hashed_key
 )
 
-select * from dim_immunizations
-
+select * from dim_immunizations as source
+{% if is_incremental() %}
+left join {{ this }} as target
+	on source.Immunization_Key = target.Immunization_Key
+where
+	target.Immunization_Key is null
+{% endif %}
 
  

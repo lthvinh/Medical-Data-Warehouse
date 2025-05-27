@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Device_Key)"
+	)
+}}
+
 with dim_default_devices as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Device_Key
@@ -26,6 +35,17 @@ with dim_default_devices as(
 	union all
 	select * from hashed_key
 )
-select * from dim_devices
+
+select * from dim_devices as source
+
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Device_Key = target.Device_Key
+where
+	target.Device_Key is null
+	
+{% endif %}
+
 order by Device_Code
 

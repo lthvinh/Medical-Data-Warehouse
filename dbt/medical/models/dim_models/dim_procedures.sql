@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Allergy_Group_Key)"
+	)
+}}
+
 with dim_default_procedures as (
     select
         '0000000000000000000000000000000000000000000000000000000000000000' AS Procedure_Key

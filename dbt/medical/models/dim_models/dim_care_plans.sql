@@ -1,3 +1,12 @@
+{{
+	config(
+		materialized = "incremental"
+		, incremental_strategy = "append"
+		, engine = "MergeTree()"
+		, unique_key = "(Care_Plan_Key)"
+	)
+}}
+
 with dim_default_care_plans as(
 	select
 	    '0000000000000000000000000000000000000000000000000000000000000000' AS Care_Plan_Key
@@ -25,6 +34,16 @@ with dim_default_care_plans as(
 	union all
 	select * from hashed_key
 )
-select * from dim_care_plans
-order by Care_Plan_Key
+select source.* from dim_care_plans as source
+
+{% if is_incremental() %}
+
+left join {{ this }} as target
+	on source.Care_Plan_Key = target.Care_Plan_Key
+where
+	target.Care_Plan_Key is null
+
+{% endif %}
+
+order by Care_Plan_Code
 

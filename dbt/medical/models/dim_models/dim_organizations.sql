@@ -1,3 +1,9 @@
+{{
+	config(
+		materialized = "ephemeral"
+	)
+}}
+
 with dim_default_organizations as (
     select
         '0000000000000000000000000000000000000000000000000000000000000000' as Organization_Key
